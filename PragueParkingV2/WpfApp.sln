@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppUI", "UI\WpfAppUI.csproj", "{7FCD0134-9ECD-422F-81D3-6142452AA45E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppDataAccess", "DataAccess\WpfAppDataAccess.csproj", "{B4D8BF14-E6F4-4FA5-BE99-CD03CE2B4FB4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FCD0134-9ECD-422F-81D3-6142452AA45E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FCD0134-9ECD-422F-81D3-6142452AA45E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FCD0134-9ECD-422F-81D3-6142452AA45E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FCD0134-9ECD-422F-81D3-6142452AA45E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4D8BF14-E6F4-4FA5-BE99-CD03CE2B4FB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4D8BF14-E6F4-4FA5-BE99-CD03CE2B4FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4D8BF14-E6F4-4FA5-BE99-CD03CE2B4FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4D8BF14-E6F4-4FA5-BE99-CD03CE2B4FB4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5CAA899B-F071-44E3-B60B-37D84B8CD76B}
+	EndGlobalSection
+EndGlobal
