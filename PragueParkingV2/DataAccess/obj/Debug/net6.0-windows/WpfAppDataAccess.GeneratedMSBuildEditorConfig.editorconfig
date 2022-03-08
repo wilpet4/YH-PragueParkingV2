@@ -7,4 +7,4 @@ build_property.InvariantGlobalization =
 build_property.PlatformNeutralAssembly = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WpfAppDataAccess
-build_property.ProjectDir = C:\Users\William\source\repos\PragueParkingV2\DataAccess\
+build_property.ProjectDir = C:\Users\William\Documents\GitHub\YH-PragueParkingV2\PragueParkingV2\DataAccess\

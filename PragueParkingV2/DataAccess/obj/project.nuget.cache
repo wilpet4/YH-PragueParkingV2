@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RT2YmoKI7xwVU7JlZsR/HAJNGj4XgeUzgFDxKQRSYTDOVepxcq2eQmScve72c4gNGNX8FTsgU0qkhDOPJXVVZQ==",
+  "dgSpecHash": "FTljCwSKY79sh416QYVUfh6st8YDac0/mPPQPyOzpCwexP7WyNARw0vNBrEz+rT/OH0idfvwxCBM8XTaXeFfKw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\William\\source\\repos\\PragueParkingV2\\DataAccess\\WpfAppDataAccess.csproj",
+  "projectFilePath": "C:\\Users\\William\\Documents\\GitHub\\YH-PragueParkingV2\\PragueParkingV2\\DataAccess\\WpfAppDataAccess.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
