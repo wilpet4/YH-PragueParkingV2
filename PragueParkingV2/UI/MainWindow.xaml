@@ -30,7 +30,7 @@
             </Rectangle.Fill>
         </Rectangle>
 
-        <Image Source="Logo.png" Grid.Column="0" Grid.Row="0" Height="100" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Image Source="Logo.png" Grid.Column="0" Grid.Row="0" Stretch="Fill" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Button x:Name="buttonAddVehicle" Content="Add Vehicle" Grid.Column="0" Grid.Row="2" Margin="5, 10"/>
         <Button x:Name="buttonRemoveVehicle" Content="Remove Vehicle" Grid.Column="0" Grid.Row="3" Margin="5, 10"/>
     </Grid>
