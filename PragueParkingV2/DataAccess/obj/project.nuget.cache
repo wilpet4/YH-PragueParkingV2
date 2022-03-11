@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+CNjQaGK4z8xXZoUKjEDWKSVs7cClFD0n/pNm6+4kYq/LYLJ/lwF+2WowhNPt2WskLUPD8xIIvHzdrIb+bPbvQ==",
+  "dgSpecHash": "OCToLh3ZDqkngGU0dt/JWfOR61Y+Psa7jFeDVaJBYv/HJcIue6Fs4bZz+Z4CgrWt1f/GH14L3X4zFwoH/MbTuQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\William\\Documents\\GitHub\\YH-PragueParkingV2\\PragueParkingV2\\DataAccess\\WpfAppDataAccess.csproj",
   "expectedPackageFiles": [
@@ -14,7 +14,7 @@
     "C:\\Users\\William\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\6.0.3\\microsoft.entityframeworkcore.sqlserver.6.0.3.nupkg.sha512",
     "C:\\Users\\William\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0\\microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\William\\.nuget\\packages\\microsoft.extensions.caching.memory\\6.0.1\\microsoft.extensions.caching.memory.6.0.1.nupkg.sha512",
-    "C:\\Users\\William\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.0\\microsoft.extensions.configuration.6.0.0.nupkg.sha512",
+    "C:\\Users\\William\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.1\\microsoft.extensions.configuration.6.0.1.nupkg.sha512",
     "C:\\Users\\William\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\William\\.nuget\\packages\\microsoft.extensions.configuration.fileextensions\\6.0.0\\microsoft.extensions.configuration.fileextensions.6.0.0.nupkg.sha512",
     "C:\\Users\\William\\.nuget\\packages\\microsoft.extensions.configuration.json\\6.0.0\\microsoft.extensions.configuration.json.6.0.0.nupkg.sha512",
