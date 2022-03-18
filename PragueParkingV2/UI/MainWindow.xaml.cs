@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using PragueParkingDataAccess;
+using PragueParkingCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace PragueParkingUI
 {
@@ -11,6 +13,8 @@ namespace PragueParkingUI
         public MainWindow()
         {
             InitializeComponent();
+            ParkingContext context  = new ParkingContext();
+            context.Database.Migrate();
 
         }
     }
