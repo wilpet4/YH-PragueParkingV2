@@ -15,7 +15,12 @@ namespace PragueParkingUI
             InitializeComponent();
             ParkingContext context  = new ParkingContext();
             context.Database.Migrate();
+        }
 
+        private void buttonAddVehicle_Click(object sender, RoutedEventArgs e)
+        {
+            AddVehicle addVehiclePopup = new AddVehicle();
+            addVehiclePopup.Show();
         }
     }
 }

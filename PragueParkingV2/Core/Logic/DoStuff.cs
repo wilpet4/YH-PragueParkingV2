@@ -10,9 +10,14 @@ namespace PragueParkingCore
 {
     public class DoStuff
     {
-        public void GetAllVehicles(in ParkingContext context)
+        public (List<string> cars, List<string> mcs) GetAllVehicles(in ParkingContext context)
         {
+            var cars = from c in context.Cars
+                       select c.Registration;
 
+            var mcs = from mc in context.MCs
+                      select mc.Registration;
+            return (cars.ToList(), mcs.ToList());
         }
     }
 }

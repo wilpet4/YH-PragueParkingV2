@@ -51,18 +51,18 @@ namespace PragueParkingDataAccess
     public class Car : Vehicle
     {
         public Car() { }
-        public Car(in byte size = 4, in string reg = "") // ?
+        public Car(in string reg) // ?
         {
-            Size = size;
+            Size = 4;
             Registration = reg;
         }
     }
     public class MC : Vehicle
     {
         public MC() { }
-        public MC(in byte size = 2, in string reg = "") // ?
+        public MC(in string reg) // ?
         {
-            Size = size;
+            Size = 2;
             Registration = reg;
         }
     }
