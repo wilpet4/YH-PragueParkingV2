@@ -9,7 +9,7 @@
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,12,0,0" TextWrapping="Wrap" Text="Registration: " VerticalAlignment="Top" Width="70"/>
         <TextBox HorizontalAlignment="Left" Margin="80,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="110"/>
-        <ComboBox HorizontalAlignment="Left" Margin="10,32,0,0" VerticalAlignment="Top" Width="90" Height="14"/>
+        <ComboBox Name="comboBoxParkingSpots" HorizontalAlignment="Left" Margin="10,32,0,0" VerticalAlignment="Top" Width="90" Height="14"/>
         <Button Content="Add" HorizontalAlignment="Left" Margin="135,147,0,0" VerticalAlignment="Top" Width="55" Height="27"/>
     </Grid>
 </Window>

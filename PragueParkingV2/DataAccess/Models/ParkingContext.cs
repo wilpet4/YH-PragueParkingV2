@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore.SqlServer;
-using System.Collections.Generic;
 
 namespace PragueParkingDataAccess
 {
@@ -29,41 +28,5 @@ namespace PragueParkingDataAccess
         public DbSet<ParkingSpot>? ParkingSpots { get; set; }
         public DbSet<Car>? Cars { get; set; }
         public DbSet<MC>? MCs { get; set; }
-    }
-    // Bryt klasserna till sina egna filer senare.
-    public class ParkingGarage
-    {
-        public int Id { get; set; }
-        public ParkingSpot? ParkingSpots { get; set; }
-
-    }
-    public class ParkingSpot
-    {
-        public int Id { get; set; }
-        public List<Vehicle>? Vehicles { get; set; }
-    }
-    public abstract class Vehicle //Table-Per-Hierarchy. Alla subklasser visas i samma Vehicle-tabell.
-    {
-        public int Id { get; set; }
-        public byte Size { get; set; }
-        public string? Registration { get; set; }
-    }
-    public class Car : Vehicle
-    {
-        public Car() { }
-        public Car(in string reg) // ?
-        {
-            Size = 4;
-            Registration = reg;
-        }
-    }
-    public class MC : Vehicle
-    {
-        public MC() { }
-        public MC(in string reg) // ?
-        {
-            Size = 2;
-            Registration = reg;
-        }
     }
 }

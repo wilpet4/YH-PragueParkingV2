@@ -10,16 +10,16 @@ namespace PragueParkingUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        ParkingContext context = new ParkingContext();
         public MainWindow()
         {
             InitializeComponent();
-            ParkingContext context  = new ParkingContext();
             context.Database.Migrate();
         }
 
         private void buttonAddVehicle_Click(object sender, RoutedEventArgs e)
         {
-            AddVehicle addVehiclePopup = new AddVehicle();
+            AddVehicle addVehiclePopup = new AddVehicle(context);
             addVehiclePopup.Show();
         }
     }
