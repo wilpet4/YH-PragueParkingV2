@@ -4,7 +4,12 @@ namespace PragueParkingDataAccess
 {
     public class ParkingSpot
     {
-        public int Id { get; set; }
+        public ParkingSpot()
+        {
+            Size = 4;
+        }
+        public int ParkingSpotId { get; set; }
+        public int Size { get; set; }
         public List<Vehicle>? Vehicles { get; set; }
     }
 }

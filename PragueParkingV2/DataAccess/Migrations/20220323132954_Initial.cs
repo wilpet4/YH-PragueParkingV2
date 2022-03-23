@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -12,12 +13,13 @@ namespace WpfAppDataAccess.Migrations
                 name: "ParkingSpots",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                    ParkingSpotId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Size = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ParkingSpots", x => x.Id);
+                    table.PrimaryKey("PK_ParkingSpots", x => x.ParkingSpotId);
                 });
 
             migrationBuilder.CreateTable(
@@ -26,43 +28,45 @@ namespace WpfAppDataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ParkingSpotsId = table.Column<int>(type: "int", nullable: true)
+                    ParkingSpotsParkingSpotId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Garages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Garages_ParkingSpots_ParkingSpotsId",
-                        column: x => x.ParkingSpotsId,
+                        name: "FK_Garages_ParkingSpots_ParkingSpotsParkingSpotId",
+                        column: x => x.ParkingSpotsParkingSpotId,
                         principalTable: "ParkingSpots",
-                        principalColumn: "Id");
+                        principalColumn: "ParkingSpotId");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Vehicle",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    VehicleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Size = table.Column<byte>(type: "tinyint", nullable: false),
                     Registration = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ParkingSpotId = table.Column<int>(type: "int", nullable: true)
+                    Arrival = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ParkingSpotId = table.Column<int>(type: "int", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vehicle", x => x.Id);
+                    table.PrimaryKey("PK_Vehicle", x => x.VehicleId);
                     table.ForeignKey(
                         name: "FK_Vehicle_ParkingSpots_ParkingSpotId",
                         column: x => x.ParkingSpotId,
                         principalTable: "ParkingSpots",
-                        principalColumn: "Id");
+                        principalColumn: "ParkingSpotId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Garages_ParkingSpotsId",
+                name: "IX_Garages_ParkingSpotsParkingSpotId",
                 table: "Garages",
-                column: "ParkingSpotsId");
+                column: "ParkingSpotsParkingSpotId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehicle_ParkingSpotId",

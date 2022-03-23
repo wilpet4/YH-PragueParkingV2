@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using PragueParkingDataAccess;
+using System.Linq;
 
 namespace PragueParkingUI
 {
@@ -11,7 +12,12 @@ namespace PragueParkingUI
         public AddVehicle(ParkingContext context)
         {
             InitializeComponent();
-            comboBoxParkingSpots.Items.Clear();
+            var query = from id in context.ParkingSpots
+                        select id.ParkingSpotId;
+            comboBoxParkingSpots.ItemsSource = query.ToList();
+            comboBoxVehicleType.ItemsSource += "Car"; //dumdum
+            comboBoxVehicleType.ItemsSource += "MC";
+
         }
     }
 }

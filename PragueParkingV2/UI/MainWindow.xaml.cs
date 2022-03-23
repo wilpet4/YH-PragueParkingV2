@@ -21,6 +21,7 @@ namespace PragueParkingUI
         {
             AddVehicle addVehiclePopup = new AddVehicle(context);
             addVehiclePopup.Show();
+            
         }
     }
 }

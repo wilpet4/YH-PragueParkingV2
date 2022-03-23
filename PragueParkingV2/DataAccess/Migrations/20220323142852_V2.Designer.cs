@@ -12,8 +12,8 @@ using PragueParkingDataAccess;
 namespace WpfAppDataAccess.Migrations
 {
     [DbContext(typeof(ParkingContext))]
-    [Migration("20220321083329_Initial")]
-    partial class Initial
+    [Migration("20220323142852_V2")]
+    partial class V2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,42 +32,48 @@ namespace WpfAppDataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("ParkingSpotsId")
+                    b.Property<int?>("ParkingSpotsParkingSpotId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParkingSpotsId");
+                    b.HasIndex("ParkingSpotsParkingSpotId");
 
                     b.ToTable("Garages");
                 });
 
             modelBuilder.Entity("PragueParkingDataAccess.ParkingSpot", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ParkingSpotId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ParkingSpotId"), 1L, 1);
 
-                    b.HasKey("Id");
+                    b.Property<int>("Size")
+                        .HasColumnType("int");
+
+                    b.HasKey("ParkingSpotId");
 
                     b.ToTable("ParkingSpots");
                 });
 
             modelBuilder.Entity("PragueParkingDataAccess.Vehicle", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("VehicleId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VehicleId"), 1L, 1);
+
+                    b.Property<DateTime>("Arrival")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ParkingSpotId")
+                    b.Property<int>("ParkingSpotId")
                         .HasColumnType("int");
 
                     b.Property<string>("Registration")
@@ -76,7 +82,7 @@ namespace WpfAppDataAccess.Migrations
                     b.Property<byte>("Size")
                         .HasColumnType("tinyint");
 
-                    b.HasKey("Id");
+                    b.HasKey("VehicleId");
 
                     b.HasIndex("ParkingSpotId");
 
@@ -103,16 +109,20 @@ namespace WpfAppDataAccess.Migrations
                 {
                     b.HasOne("PragueParkingDataAccess.ParkingSpot", "ParkingSpots")
                         .WithMany()
-                        .HasForeignKey("ParkingSpotsId");
+                        .HasForeignKey("ParkingSpotsParkingSpotId");
 
                     b.Navigation("ParkingSpots");
                 });
 
             modelBuilder.Entity("PragueParkingDataAccess.Vehicle", b =>
                 {
-                    b.HasOne("PragueParkingDataAccess.ParkingSpot", null)
+                    b.HasOne("PragueParkingDataAccess.ParkingSpot", "ParkingSpot")
                         .WithMany("Vehicles")
-                        .HasForeignKey("ParkingSpotId");
+                        .HasForeignKey("ParkingSpotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ParkingSpot");
                 });
 
             modelBuilder.Entity("PragueParkingDataAccess.ParkingSpot", b =>
