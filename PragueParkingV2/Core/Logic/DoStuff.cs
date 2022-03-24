@@ -20,4 +20,13 @@ namespace PragueParkingCore
             return (cars.ToList(), mcs.ToList());
         }
     }
+    public static class DoStuffExtensions // flytta till egen fil senare kanske
+    {
+        public static List<ParkingSpot> GetAllParkingSpots(in ParkingContext context)
+        {
+            var query = from p in context.ParkingSpots
+                        select p;
+            return query.ToList();
+        }
+    }
 }
