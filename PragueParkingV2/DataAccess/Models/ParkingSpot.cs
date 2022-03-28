@@ -10,6 +10,6 @@ namespace PragueParkingDataAccess
         }
         public int ParkingSpotId { get; set; }
         public int Size { get; set; }
-        public List<Vehicle>? Vehicles { get; set; }
+        public ICollection<Vehicle>? Vehicles { get; set; }
     }
 }
