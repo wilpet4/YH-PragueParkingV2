@@ -1,9 +1,11 @@
-﻿namespace PragueParkingDataAccess
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace PragueParkingDataAccess
 {
     public class ParkingGarage
     {
-        public int Id { get; set; }
-        public ParkingSpot? ParkingSpots { get; set; }
-
+        [Key]public int GarageId { get; set; }
+        public ICollection<ParkingSpot> ParkingSpots { get; set; }
     }
 }

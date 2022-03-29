@@ -12,8 +12,8 @@ using PragueParkingDataAccess;
 namespace WpfAppDataAccess.Migrations
 {
     [DbContext(typeof(ParkingContext))]
-    [Migration("20220323142852_V2")]
-    partial class V2
+    [Migration("20220329072656_InitialV4")]
+    partial class InitialV4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,18 +26,13 @@ namespace WpfAppDataAccess.Migrations
 
             modelBuilder.Entity("PragueParkingDataAccess.ParkingGarage", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("GarageId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GarageId"), 1L, 1);
 
-                    b.Property<int?>("ParkingSpotsParkingSpotId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParkingSpotsParkingSpotId");
+                    b.HasKey("GarageId");
 
                     b.ToTable("Garages");
                 });
@@ -50,10 +45,15 @@ namespace WpfAppDataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ParkingSpotId"), 1L, 1);
 
+                    b.Property<int>("GarageId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Size")
                         .HasColumnType("int");
 
                     b.HasKey("ParkingSpotId");
+
+                    b.HasIndex("GarageId");
 
                     b.ToTable("ParkingSpots");
                 });
@@ -105,24 +105,31 @@ namespace WpfAppDataAccess.Migrations
                     b.HasDiscriminator().HasValue("MC");
                 });
 
-            modelBuilder.Entity("PragueParkingDataAccess.ParkingGarage", b =>
+            modelBuilder.Entity("PragueParkingDataAccess.ParkingSpot", b =>
                 {
-                    b.HasOne("PragueParkingDataAccess.ParkingSpot", "ParkingSpots")
-                        .WithMany()
-                        .HasForeignKey("ParkingSpotsParkingSpotId");
+                    b.HasOne("PragueParkingDataAccess.ParkingGarage", "Garage")
+                        .WithMany("ParkingSpots")
+                        .HasForeignKey("GarageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("ParkingSpots");
+                    b.Navigation("Garage");
                 });
 
             modelBuilder.Entity("PragueParkingDataAccess.Vehicle", b =>
                 {
-                    b.HasOne("PragueParkingDataAccess.ParkingSpot", "ParkingSpot")
+                    b.HasOne("PragueParkingDataAccess.ParkingSpot", "Parking")
                         .WithMany("Vehicles")
                         .HasForeignKey("ParkingSpotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ParkingSpot");
+                    b.Navigation("Parking");
+                });
+
+            modelBuilder.Entity("PragueParkingDataAccess.ParkingGarage", b =>
+                {
+                    b.Navigation("ParkingSpots");
                 });
 
             modelBuilder.Entity("PragueParkingDataAccess.ParkingSpot", b =>

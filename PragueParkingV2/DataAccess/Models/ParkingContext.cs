@@ -24,8 +24,8 @@ namespace PragueParkingDataAccess
         {
 
         }
-        public DbSet<ParkingGarage>? Garages { get; set; }
-        public DbSet<ParkingSpot>? ParkingSpots { get; set; }
+        public DbSet<ParkingGarage> Garages { get; set; }
+        public DbSet<ParkingSpot> ParkingSpots { get; set; }
         public DbSet<Car>? Cars { get; set; }
         public DbSet<MC>? MCs { get; set; }
     }

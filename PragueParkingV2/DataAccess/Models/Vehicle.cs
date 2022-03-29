@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace PragueParkingDataAccess
 {
@@ -10,15 +12,16 @@ namespace PragueParkingDataAccess
         public string? Registration { get; set; }
         public DateTime Arrival { get; set; }
 
-        public int ParkingSpotId { get; set; }
-
-        [ForeignKey("ParkingSpotId")]
-        public ParkingSpot ParkingSpot { get; set; }
+        [Required] public ParkingSpot Parking { get; set; }
     }
     public class Car : Vehicle
     {
-        public Car() { }
-        public Car(in string reg, in int parkingSpot) // ?
+        public Car() // Tomma constructors behövs för att migrations ska fungera.
+        {
+            Size = 4;
+            Arrival = DateTime.Now;
+        }
+        public Car(in string reg, in ParkingSpot parkingSpot, in ParkingContext context) // Använd alltid in-parametrar för att skapa objekt.
         {
             Size = 4;
             Registration = reg;
@@ -27,8 +30,12 @@ namespace PragueParkingDataAccess
     }
     public class MC : Vehicle
     {
-        public MC() { }
-        public MC(in string reg, in int parkingSpot) // ?
+        public MC()
+        {
+            Size = 2;
+            Arrival = DateTime.Now;
+        }
+        public MC(in string reg, in ParkingSpot parkingSpot, in ParkingContext context) // ?
         {
             Size = 2;
             Registration = reg;

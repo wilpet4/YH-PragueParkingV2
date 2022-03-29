@@ -4,7 +4,7 @@
 
 namespace WpfAppDataAccess.Migrations
 {
-    public partial class V2 : Migration
+    public partial class InitialV2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

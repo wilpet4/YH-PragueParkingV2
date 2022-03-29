@@ -10,34 +10,34 @@ namespace WpfAppDataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Garages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Garages", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ParkingSpots",
                 columns: table => new
                 {
                     ParkingSpotId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Size = table.Column<int>(type: "int", nullable: false)
+                    Size = table.Column<int>(type: "int", nullable: false),
+                    ParkingGarageId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ParkingSpots", x => x.ParkingSpotId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Garages",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ParkingSpotsParkingSpotId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Garages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Garages_ParkingSpots_ParkingSpotsParkingSpotId",
-                        column: x => x.ParkingSpotsParkingSpotId,
-                        principalTable: "ParkingSpots",
-                        principalColumn: "ParkingSpotId");
+                        name: "FK_ParkingSpots_Garages_ParkingGarageId",
+                        column: x => x.ParkingGarageId,
+                        principalTable: "Garages",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -64,9 +64,9 @@ namespace WpfAppDataAccess.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Garages_ParkingSpotsParkingSpotId",
-                table: "Garages",
-                column: "ParkingSpotsParkingSpotId");
+                name: "IX_ParkingSpots_ParkingGarageId",
+                table: "ParkingSpots",
+                column: "ParkingGarageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehicle_ParkingSpotId",
@@ -77,13 +77,13 @@ namespace WpfAppDataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Garages");
-
-            migrationBuilder.DropTable(
                 name: "Vehicle");
 
             migrationBuilder.DropTable(
                 name: "ParkingSpots");
+
+            migrationBuilder.DropTable(
+                name: "Garages");
         }
     }
 }

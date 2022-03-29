@@ -12,8 +12,8 @@ using PragueParkingDataAccess;
 namespace WpfAppDataAccess.Migrations
 {
     [DbContext(typeof(ParkingContext))]
-    [Migration("20220323132954_Initial")]
-    partial class Initial
+    [Migration("20220329063306_InitialV2")]
+    partial class InitialV2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,12 +32,7 @@ namespace WpfAppDataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("ParkingSpotsParkingSpotId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ParkingSpotsParkingSpotId");
 
                     b.ToTable("Garages");
                 });
@@ -50,10 +45,15 @@ namespace WpfAppDataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ParkingSpotId"), 1L, 1);
 
+                    b.Property<int?>("ParkingGarageId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Size")
                         .HasColumnType("int");
 
                     b.HasKey("ParkingSpotId");
+
+                    b.HasIndex("ParkingGarageId");
 
                     b.ToTable("ParkingSpots");
                 });
@@ -105,13 +105,11 @@ namespace WpfAppDataAccess.Migrations
                     b.HasDiscriminator().HasValue("MC");
                 });
 
-            modelBuilder.Entity("PragueParkingDataAccess.ParkingGarage", b =>
+            modelBuilder.Entity("PragueParkingDataAccess.ParkingSpot", b =>
                 {
-                    b.HasOne("PragueParkingDataAccess.ParkingSpot", "ParkingSpots")
-                        .WithMany()
-                        .HasForeignKey("ParkingSpotsParkingSpotId");
-
-                    b.Navigation("ParkingSpots");
+                    b.HasOne("PragueParkingDataAccess.ParkingGarage", null)
+                        .WithMany("Vehicles")
+                        .HasForeignKey("ParkingGarageId");
                 });
 
             modelBuilder.Entity("PragueParkingDataAccess.Vehicle", b =>
@@ -123,6 +121,11 @@ namespace WpfAppDataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("ParkingSpot");
+                });
+
+            modelBuilder.Entity("PragueParkingDataAccess.ParkingGarage", b =>
+                {
+                    b.Navigation("Vehicles");
                 });
 
             modelBuilder.Entity("PragueParkingDataAccess.ParkingSpot", b =>
