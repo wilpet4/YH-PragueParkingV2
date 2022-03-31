@@ -3,6 +3,7 @@ using PragueParkingDataAccess;
 using PragueParkingCore;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PragueParkingUI
 {
@@ -16,7 +17,8 @@ namespace PragueParkingUI
         {
             InitializeComponent();
             context.Database.Migrate();
-            RunSampleData(context);
+            //RunSampleData(context);
+            //AddParkingSpots(context);
         }
 
         private void buttonAddVehicle_Click(object sender, RoutedEventArgs e)
@@ -26,16 +28,19 @@ namespace PragueParkingUI
         }
         private void RunSampleData(in ParkingContext context)
         {
-            int garageSize = 8;
             ParkingGarage garage = new ParkingGarage();
-            List<ParkingSpot> pSpots = new List<ParkingSpot>();
+            context.Garages.Add(garage);
+            context.SaveChanges();
+        }
+        private void AddParkingSpots(in ParkingContext context)
+        {
+            int garageSize = 8;
+            ParkingGarage garage = context.Garages.FirstOrDefault();
             for (int i = 0; i < garageSize; i++)
             {
                 ParkingSpot p = new ParkingSpot();
                 garage.ParkingSpots.Add(p);
-                pSpots.Add(p);
             }
-            context.Garages.Add(garage);
             context.SaveChanges();
         }
     }
