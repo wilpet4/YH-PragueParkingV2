@@ -14,9 +14,9 @@ namespace PragueParkingUI
         public AddVehicle(ParkingContext context)
         {
             InitializeComponent();
-            comboBoxParkingSpots.ItemsSource = LoadAvailableParkingSpots();
-            comboBoxVehicleType.ItemsSource += "Car"; //dumdum
-            comboBoxVehicleType.ItemsSource += "MC";
+            comboBoxParkingSpots.ItemsSource = DoStuffExtensions.GetAllParkingSpots(context);
+            string[] test = { "Car", "MC" };
+            comboBoxVehicleType.ItemsSource = DoStuffExtensions.GetAllVehicleTypes();
 
             #region Local Functions
             List<int> LoadAvailableParkingSpots()

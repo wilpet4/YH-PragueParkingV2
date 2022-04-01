@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PragueParkingDataAccess;
+using System.Collections;
 
 namespace PragueParkingCore
 {
@@ -22,6 +23,14 @@ namespace PragueParkingCore
     }
     public static class DoStuffExtensions // flytta till egen fil senare kanske
     {
+        public enum VehicleTypes { Car, MC }
+        public static List<VehicleTypes> GetAllVehicleTypes()
+        {
+            List<VehicleTypes> result = new List<VehicleTypes>();
+            result.Add(VehicleTypes.Car);
+            result.Add(VehicleTypes.MC);
+            return result;
+        }
         public static List<ParkingSpot> GetAllParkingSpots(in ParkingContext context)
         {
             var query = from p in context.ParkingSpots
