@@ -21,7 +21,7 @@ namespace PragueParkingDataAccess
             Size = 4;
             Arrival = DateTime.Now;
         }
-        public Car(in string reg, in ParkingSpot parkingSpot, in ParkingContext context) // Använd alltid in-parametrar för att skapa objekt.
+        public Car(in string reg) // Använd alltid in-parametrar för att skapa objekt.
         {
             Size = 4;
             Registration = reg;
@@ -35,7 +35,7 @@ namespace PragueParkingDataAccess
             Size = 2;
             Arrival = DateTime.Now;
         }
-        public MC(in string reg, in ParkingSpot parkingSpot, in ParkingContext context) // ?
+        public MC(in string reg) // ?
         {
             Size = 2;
             Registration = reg;
