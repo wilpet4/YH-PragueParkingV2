@@ -23,7 +23,7 @@ namespace PragueParkingCore
     }
     public static class DoStuffExtensions // flytta till egen fil senare kanske
     {
-        public enum VehicleTypes { Car, MC } // Måste hålle denna uppdaterad. Inte kommit på ett bättre sätt än.
+        public enum VehicleTypes { Car, MC } // Måste hålla denna uppdaterad. Inte kommit på ett bättre sätt än.
         public static List<VehicleTypes> GetAllVehicleTypes()
         {
             List<VehicleTypes> result = new List<VehicleTypes>();
@@ -39,7 +39,7 @@ namespace PragueParkingCore
         }
         public static ParkingSpot GetParkingSpot(in ParkingContext context, in int id)
         {
-            int i = id;
+            int i = id + 1;
             var query = from p in context.ParkingSpots
                         where p.ParkingSpotId == i
                         select p;

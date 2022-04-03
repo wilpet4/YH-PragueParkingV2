@@ -8,11 +8,12 @@ namespace PragueParkingDataAccess
     {
         public ParkingSpot()
         {
+            Vehicles = new List<Vehicle>();
             Size = 4;
         }
         public int ParkingSpotId { get; set; }
         public int Size { get; set; }
-        public ICollection<Vehicle>? Vehicles { get; set; }
+        public ICollection<Vehicle> Vehicles { get; set; } // null problem här.
         [Required] public ParkingGarage Garage { get; set; }
     }
 }

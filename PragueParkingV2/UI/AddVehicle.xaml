@@ -9,8 +9,8 @@
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,12,0,0" TextWrapping="Wrap" Text="Registration: " VerticalAlignment="Top" Width="70"/>
         <TextBox Name="textBoxRegistration" HorizontalAlignment="Left" Margin="80,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="110"/>
-        <ComboBox Name="comboBoxParkingSpots" HorizontalAlignment="Left" Margin="10,32,0,0" VerticalAlignment="Top" Width="80" Height="14"/>
+        <ComboBox Name="comboBoxParkingSpots" HorizontalAlignment="Left" Margin="10,32,0,0" VerticalAlignment="Top" Width="80" Height="18"/>
         <Button Name="buttonAdd" Content="Add" HorizontalAlignment="Left" Margin="135,147,0,0" VerticalAlignment="Top" Width="55" Height="27" Click="buttonAdd_Click"/>
-        <ComboBox Name="comboBoxVehicleType" HorizontalAlignment="Left" Margin="109,32,0,0" VerticalAlignment="Top" Width="80" Height="14"/>
+        <ComboBox Name="comboBoxVehicleType" HorizontalAlignment="Left" Margin="109,32,0,0" VerticalAlignment="Top" Width="80" Height="18"/>
     </Grid>
 </Window>

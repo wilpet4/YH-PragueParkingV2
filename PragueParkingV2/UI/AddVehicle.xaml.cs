@@ -26,7 +26,7 @@ namespace PragueParkingUI
                 var query = DoStuffExtensions.GetAllParkingSpots(context);
                 foreach (var pSpot in query)
                 {
-                    if (pSpot.Vehicles == null) // kanske dumt
+                    if (pSpot.Vehicles.Count == 0) // kanske dumt
                     {
                         result.Add(pSpot.ParkingSpotId);
                     }
@@ -48,10 +48,11 @@ namespace PragueParkingUI
             {
                 case DoStuffExtensions.VehicleTypes.Car:
                     Car newCar = new Car(reg);
-                    p.Vehicles.Add(newCar);
+                    p.Vehicles.Add(newCar); //ERROR: object reference not set
                     break;
                 case DoStuffExtensions.VehicleTypes.MC:
-
+                    MC newMC = new MC(reg);
+                    p.Vehicles.Add(newMC);
                     break;
                 default:
                     break;
