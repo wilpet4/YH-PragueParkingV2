@@ -41,6 +41,7 @@ namespace PragueParkingUI
             {
                 return;
             }
+            // Kanske flytta detta till en egen metod.
             string reg = textBoxRegistration.Text;
             var vehicleInput = (DoStuffExtensions.VehicleTypes)comboBoxVehicleType.SelectedItem;
             ParkingSpot p = DoStuffExtensions.GetParkingSpot(context, comboBoxParkingSpots.SelectedIndex);
@@ -48,7 +49,7 @@ namespace PragueParkingUI
             {
                 case DoStuffExtensions.VehicleTypes.Car:
                     Car newCar = new Car(reg);
-                    p.Vehicles.Add(newCar); //ERROR: object reference not set
+                    p.Vehicles.Add(newCar);
                     break;
                 case DoStuffExtensions.VehicleTypes.MC:
                     MC newMC = new MC(reg);
@@ -57,7 +58,9 @@ namespace PragueParkingUI
                 default:
                     break;
             }
-
+            context.SaveChanges();
+            //
+            Close();
         }
     }
 }
