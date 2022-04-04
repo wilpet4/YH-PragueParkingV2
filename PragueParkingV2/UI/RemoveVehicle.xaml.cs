@@ -1,5 +1,7 @@
 ﻿using PragueParkingDataAccess;
 using System.Windows;
+using System.Linq;
+using PragueParkingCore;
 
 namespace PragueParkingUI
 {
@@ -12,6 +14,8 @@ namespace PragueParkingUI
         public RemoveVehicle(PragueParkingDataAccess.ParkingContext context)
         {
             InitializeComponent();
+            this.context = context;
+            dataGridVehicleSelection.ItemsSource = DoStuffExtensions.GetAllParkingSpots(context);
         }
     }
 }

@@ -8,6 +8,6 @@
         Title="RemoveVehicle" Height="250" Width="400" SizeToContent="WidthAndHeight">
     <Grid>
         <Button Name="buttonRemove" Content="Remove" HorizontalAlignment="Left" Margin="310,184,0,0" VerticalAlignment="Top" Width="80" Height="40"/>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="310,10,10,55"/>
+        <DataGrid Name="dataGridVehicleSelection" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="310,10,10,0" VerticalAlignment="Top" MaxWidth="80" MaxHeight="169"/>
     </Grid>
 </Window>
