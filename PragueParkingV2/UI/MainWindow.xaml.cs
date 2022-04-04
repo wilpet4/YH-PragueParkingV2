@@ -26,6 +26,11 @@ namespace PragueParkingUI
             AddVehicle addVehiclePopup = new AddVehicle(context);
             addVehiclePopup.Show();
         }
+        private void buttonRemoveVehicle_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveVehicle removeVehiclePopup = new RemoveVehicle(context);
+            removeVehiclePopup.Show();
+        }
         private void RunSampleData(in ParkingContext context)
         {
             ParkingGarage garage = new ParkingGarage();
@@ -43,5 +48,7 @@ namespace PragueParkingUI
             }
             context.SaveChanges();
         }
+
+
     }
 }

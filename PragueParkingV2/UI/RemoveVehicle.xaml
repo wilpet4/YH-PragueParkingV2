@@ -1,0 +1,13 @@
+﻿<Window x:Class="PragueParkingUI.RemoveVehicle"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PragueParkingUI"
+        mc:Ignorable="d" FontFamily="Lato" FontSize="12"
+        Title="RemoveVehicle" Height="250" Width="400" SizeToContent="WidthAndHeight">
+    <Grid>
+        <Button Name="buttonRemove" Content="Remove" HorizontalAlignment="Left" Margin="310,184,0,0" VerticalAlignment="Top" Width="80" Height="40"/>
+        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="310,10,10,55"/>
+    </Grid>
+</Window>
