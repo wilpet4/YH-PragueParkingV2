@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\William\\Documents\\GitHub\\YH-PragueParkingV2\\PragueParkingV2\\DataAccess\\WpfAppDataAccess.csproj": {}
+    "C:\\Users\\willi\\Documents\\GitHub\\YH-PragueParkingV2\\PragueParkingV2\\DataAccess\\WpfAppDataAccess.csproj": {}
   },
   "projects": {
-    "C:\\Users\\William\\Documents\\GitHub\\YH-PragueParkingV2\\PragueParkingV2\\DataAccess\\WpfAppDataAccess.csproj": {
+    "C:\\Users\\willi\\Documents\\GitHub\\YH-PragueParkingV2\\PragueParkingV2\\DataAccess\\WpfAppDataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\William\\Documents\\GitHub\\YH-PragueParkingV2\\PragueParkingV2\\DataAccess\\WpfAppDataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\willi\\Documents\\GitHub\\YH-PragueParkingV2\\PragueParkingV2\\DataAccess\\WpfAppDataAccess.csproj",
         "projectName": "WpfAppDataAccess",
-        "projectPath": "C:\\Users\\William\\Documents\\GitHub\\YH-PragueParkingV2\\PragueParkingV2\\DataAccess\\WpfAppDataAccess.csproj",
-        "packagesPath": "C:\\Users\\William\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\William\\Documents\\GitHub\\YH-PragueParkingV2\\PragueParkingV2\\DataAccess\\obj\\",
+        "projectPath": "C:\\Users\\willi\\Documents\\GitHub\\YH-PragueParkingV2\\PragueParkingV2\\DataAccess\\WpfAppDataAccess.csproj",
+        "packagesPath": "C:\\Users\\willi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\willi\\Documents\\GitHub\\YH-PragueParkingV2\\PragueParkingV2\\DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\William\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\willi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0-windows7.0"
@@ -85,7 +87,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

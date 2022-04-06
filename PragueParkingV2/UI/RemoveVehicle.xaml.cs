@@ -11,11 +11,11 @@ namespace PragueParkingUI
     public partial class RemoveVehicle : Window
     {
         ParkingContext? context;
-        public RemoveVehicle(PragueParkingDataAccess.ParkingContext context)
+        public RemoveVehicle(ParkingContext context)
         {
             InitializeComponent();
             this.context = context;
-            dataGridVehicleSelection.ItemsSource = DoStuffExtensions.GetAllParkingSpots(context);
+            dataGridVehicleSelection.ItemsSource = DoStuffExtensions.GetAvailableParkingSpots(context);
         }
     }
 }

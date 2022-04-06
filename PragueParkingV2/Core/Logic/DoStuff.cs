@@ -37,6 +37,24 @@ namespace PragueParkingCore
                         select p;
             return query.ToList();
         }
+        
+        public static List<ParkingSpot> GetAvailableParkingSpots(in ParkingContext context) 
+        {
+            List<ParkingSpot> unprocessedList = GetAllParkingSpots(context);
+            List<ParkingSpot> processedList = new List<ParkingSpot>();
+            foreach (var item in unprocessedList) // funkar fan inte
+            {
+                if (item.Vehicles.Any())
+                {
+                    continue;
+                }
+                else
+                {
+                    processedList.Add(item);
+                }
+            }
+            return processedList;
+        }
         public static ParkingSpot GetParkingSpot(in ParkingContext context, in int id)
         {
             int i = id + 1;
