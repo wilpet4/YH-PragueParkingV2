@@ -17,5 +17,19 @@ namespace PragueParkingUI
             this.context = context;
             dataGridVehicleSelection.ItemsSource = DoStuffExtensions.GetAvailableParkingSpots(context);
         }
+
+        private void buttonRemove_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataGridVehicleSelection.SelectedItems.GetType() == System.Type.GetType("ParkingSpot"))
+            {
+                foreach (ParkingSpot item in dataGridVehicleSelection.SelectedItems)
+                {
+                    // Print receipts here!!!
+                    DoStuff.PrintReceipt();
+                    //
+                    item.Vehicles.Clear();
+                }
+            }
+        }
     }
 }

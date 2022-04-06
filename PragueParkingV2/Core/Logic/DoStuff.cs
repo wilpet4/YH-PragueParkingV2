@@ -20,6 +20,11 @@ namespace PragueParkingCore
                       select mc.Registration;
             return (cars.ToList(), mcs.ToList());
         }
+
+        public static void PrintReceipt()
+        {
+            throw new NotImplementedException();
+        }
     }
     public static class DoStuffExtensions // flytta till egen fil senare kanske
     {
@@ -40,20 +45,10 @@ namespace PragueParkingCore
         
         public static List<ParkingSpot> GetAvailableParkingSpots(in ParkingContext context) 
         {
-            List<ParkingSpot> unprocessedList = GetAllParkingSpots(context);
-            List<ParkingSpot> processedList = new List<ParkingSpot>();
-            foreach (var item in unprocessedList) // funkar fan inte
-            {
-                if (item.Vehicles.Any())
-                {
-                    continue;
-                }
-                else
-                {
-                    processedList.Add(item);
-                }
-            }
-            return processedList;
+            var query = from p in context.ParkingSpots
+                        where p.Vehicles.Count == 0
+                        select p;
+            return query.ToList();
         }
         public static ParkingSpot GetParkingSpot(in ParkingContext context, in int id)
         {
