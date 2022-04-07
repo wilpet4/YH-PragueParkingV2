@@ -12,32 +12,33 @@ namespace PragueParkingUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        ParkingContext context = new ParkingContext();
+        ParkingContext context = DoStuffExtensions.context;
         public MainWindow()
         {
             InitializeComponent();
+
             context.Database.Migrate();
-            //RunSampleData(context);
-            //AddParkingSpots(context);
+            //RunSampleData();
+            //AddParkingSpots();
         }
 
         private void buttonAddVehicle_Click(object sender, RoutedEventArgs e)
         {
-            AddVehicle addVehiclePopup = new AddVehicle(context);
+            AddVehicle addVehiclePopup = new AddVehicle();
             addVehiclePopup.Show();
         }
         private void buttonRemoveVehicle_Click(object sender, RoutedEventArgs e)
         {
-            RemoveVehicle removeVehiclePopup = new RemoveVehicle(context);
+            RemoveVehicle removeVehiclePopup = new RemoveVehicle();
             removeVehiclePopup.Show();
         }
-        private void RunSampleData(in ParkingContext context)
+        private void RunSampleData()
         {
             ParkingGarage garage = new ParkingGarage();
             context.Garages.Add(garage);
             context.SaveChanges();
         }
-        private void AddParkingSpots(in ParkingContext context)
+        private void AddParkingSpots()
         {
             int garageSize = 8;
             ParkingGarage garage = context.Garages.FirstOrDefault();

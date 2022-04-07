@@ -11,7 +11,7 @@ namespace PragueParkingCore
 {
     public class DoStuff
     {
-        ParkingContext context = ParkingContext.Instance;
+        ParkingContext context;
         public (List<string> cars, List<string> mcs) GetAllVehicles()
         {
             var cars = from c in context.Cars
@@ -21,7 +21,17 @@ namespace PragueParkingCore
                       select mc.Registration;
             return (cars.ToList(), mcs.ToList());
         }
-
+        public void SupplyRemoveVehicleDataGrid(List<ParkingSpot> parkingSpots)
+        {
+            List<Vehicle> result = new List<Vehicle>();
+            foreach (var item in parkingSpots)
+            {
+                foreach (Vehicle vehicle in item.Vehicles)
+                {
+                    result.Add(vehicle);
+                }
+            }
+        }
         public static void PrintReceipt()
         {
             throw new NotImplementedException();
@@ -30,6 +40,7 @@ namespace PragueParkingCore
     public static class DoStuffExtensions // flytta till egen fil senare kanske
     {
         public enum VehicleTypes { Car, MC } // Måste hålla denna uppdaterad. Inte kommit på ett bättre sätt än.
+        public static ParkingContext context = new ParkingContext();
         public static List<VehicleTypes> GetAllVehicleTypes()
         {
             List<VehicleTypes> result = new List<VehicleTypes>();
@@ -43,11 +54,17 @@ namespace PragueParkingCore
                         select p;
             return query.ToList();
         }
-        
         public static List<ParkingSpot> GetAvailableParkingSpots(in ParkingContext context) 
         {
             var query = from p in context.ParkingSpots
                         where p.Vehicles.Count == 0
+                        select p;
+            return query.ToList();
+        }
+        public static List<ParkingSpot> GetOccupiedParkingSpots(in ParkingContext context)
+        {
+            var query = from p in context.ParkingSpots
+                        where p.Vehicles.Count > 0
                         select p;
             return query.ToList();
         }

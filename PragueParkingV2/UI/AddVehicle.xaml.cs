@@ -11,11 +11,10 @@ namespace PragueParkingUI
     /// </summary>
     public partial class AddVehicle : Window
     {
-        ParkingContext? context;
-        public AddVehicle(ParkingContext context)
+        ParkingContext context = DoStuffExtensions.context;
+        public AddVehicle()
         {
             InitializeComponent();
-            this.context = context;
             comboBoxParkingSpots.ItemsSource = LoadAvailableParkingSpots();
             comboBoxVehicleType.ItemsSource = DoStuffExtensions.GetAllVehicleTypes();
 
@@ -23,10 +22,10 @@ namespace PragueParkingUI
             List<int> LoadAvailableParkingSpots()
             {
                 List<int> result = new List<int>();
-                var query = DoStuffExtensions.GetAllParkingSpots(context);
+                var query = DoStuffExtensions.GetAvailableParkingSpots(context);
                 foreach (var pSpot in query)
                 {
-                    if (pSpot.Vehicles.Count == 0) // kanske dumt
+                    if (!pSpot.Vehicles.Any()) // kanske dumt
                     {
                         result.Add(pSpot.ParkingSpotId);
                     }
