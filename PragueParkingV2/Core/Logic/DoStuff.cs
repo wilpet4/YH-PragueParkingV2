@@ -11,7 +11,8 @@ namespace PragueParkingCore
 {
     public class DoStuff
     {
-        public (List<string> cars, List<string> mcs) GetAllVehicles(in ParkingContext context)
+        ParkingContext context = ParkingContext.Instance;
+        public (List<string> cars, List<string> mcs) GetAllVehicles()
         {
             var cars = from c in context.Cars
                        select c.Registration;

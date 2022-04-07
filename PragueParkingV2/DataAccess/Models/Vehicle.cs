@@ -5,8 +5,12 @@ using System.Linq;
 
 namespace PragueParkingDataAccess
 {
-    public abstract class Vehicle //Table-Per-Hierarchy. Alla subklasser visas i samma Vehicle-tabell.
+    public abstract class Vehicle : IArrive //Table-Per-Hierarchy. Alla subklasser visas i samma Vehicle-tabell.
     {
+        public Vehicle()
+        {
+            Arrival = DateTime.Now;
+        }
         public int VehicleId { get; set; }
         public byte Size { get; set; }
         public string? Registration { get; set; }
@@ -16,16 +20,14 @@ namespace PragueParkingDataAccess
     }
     public class Car : Vehicle
     {
-        public Car() // Tomma constructors behövs för att migrations ska fungera.
+        public Car() // Tomma public constructors behövs för att migrations ska fungera.
         {
             Size = 4;
-            Arrival = DateTime.Now;
         }
         public Car(in string reg) // Använd alltid in-parametrar för att skapa objekt.
         {
             Size = 4;
             Registration = reg;
-            Arrival = DateTime.Now;
         }
     }
     public class MC : Vehicle
@@ -33,13 +35,11 @@ namespace PragueParkingDataAccess
         public MC()
         {
             Size = 2;
-            Arrival = DateTime.Now;
         }
         public MC(in string reg) // ?
         {
             Size = 2;
             Registration = reg;
-            Arrival = DateTime.Now;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace WpfAppDataAccess.Migrations
+namespace PragueParkingDataAccess.Migrations
 {
     public partial class InitialV3 : Migration
     {

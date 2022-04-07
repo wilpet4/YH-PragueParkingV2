@@ -6,7 +6,15 @@ namespace PragueParkingDataAccess
 {
     public class ParkingContext : DbContext
     {
-        public ParkingContext() { }
+        private static ParkingContext instance = null;
+        public static ParkingContext Instance { get { return instance; } }
+        public ParkingContext() 
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var builder = new ConfigurationBuilder()

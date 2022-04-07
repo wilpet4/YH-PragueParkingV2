@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace WpfAppDataAccess.Migrations
+namespace PragueParkingDataAccess.Migrations
 {
     public partial class Initial : Migration
     {

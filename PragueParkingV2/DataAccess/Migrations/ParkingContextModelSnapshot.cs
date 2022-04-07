@@ -8,7 +8,7 @@ using PragueParkingDataAccess;
 
 #nullable disable
 
-namespace WpfAppDataAccess.Migrations
+namespace PragueParkingDataAccess.Migrations
 {
     [DbContext(typeof(ParkingContext))]
     partial class ParkingContextModelSnapshot : ModelSnapshot

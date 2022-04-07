@@ -9,7 +9,7 @@ using PragueParkingDataAccess;
 
 #nullable disable
 
-namespace WpfAppDataAccess.Migrations
+namespace PragueParkingDataAccess.Migrations
 {
     [DbContext(typeof(ParkingContext))]
     [Migration("20220329063853_InitialV3")]
