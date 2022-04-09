@@ -83,5 +83,16 @@ namespace PragueParkingCore
                 return null;
             }
         }
+        public static List<Vehicle> GetAllVehicles(in ParkingContext context)
+        {
+            List<Vehicle> result = new List<Vehicle>();
+            var query = from v in context.Cars
+                        select v;
+            var query2 = from mc in context.MCs
+                         select mc;
+            result.AddRange(query.ToList());
+            result.AddRange(query2.ToList());
+            return result;
+        }
     }
 }

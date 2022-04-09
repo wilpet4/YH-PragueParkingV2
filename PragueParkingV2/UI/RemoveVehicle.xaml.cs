@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Linq;
 using PragueParkingCore;
+using System.Collections.Generic;
 
 namespace PragueParkingUI
 {
@@ -15,10 +16,16 @@ namespace PragueParkingUI
         public RemoveVehicle()
         {
             InitializeComponent();
-            doStuff.SupplyRemoveVehicleDataGrid(DoStuffExtensions.GetOccupiedParkingSpots(context));
-            dataGridVehicleSelection.ItemsSource = DoStuffExtensions.GetOccupiedParkingSpots(context);
-        }
+            FormatDataGrid();
 
+        }
+        private void FormatDataGrid()
+        {
+            List<Vehicle> vehicles = DoStuffExtensions.GetAllVehicles(context);
+            var format = from v in vehicles
+                         select new { v.Parking.ParkingSpotId, v.Registration, v.Arrival };
+            dataGridVehicleSelection.ItemsSource = format.ToList();
+        }
         private void buttonRemove_Click(object sender, RoutedEventArgs e)
         {
             if (dataGridVehicleSelection.SelectedItems.GetType() == System.Type.GetType("ParkingSpot"))
