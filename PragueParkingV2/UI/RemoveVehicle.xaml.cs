@@ -11,7 +11,7 @@ namespace PragueParkingUI
     /// </summary>
     public partial class RemoveVehicle : Window
     {
-        ParkingContext context = DoStuffExtensions.context;
+        ParkingContext context = Db.Instance;
         DoStuff doStuff = new DoStuff();
         public RemoveVehicle()
         {

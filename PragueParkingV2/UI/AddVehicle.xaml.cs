@@ -11,7 +11,7 @@ namespace PragueParkingUI
     /// </summary>
     public partial class AddVehicle : Window
     {
-        ParkingContext context = DoStuffExtensions.context;
+        ParkingContext context = Db.Instance;
         public AddVehicle()
         {
             InitializeComponent();

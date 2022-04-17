@@ -16,6 +16,7 @@ namespace PragueParkingDataAccess
         public string? Registration { get; set; }
         public DateTime Arrival { get; set; }
 
+        public int ParkingSpotId { get; set; }
         [Required] public ParkingSpot Parking { get; set; }
     }
     public class Car : Vehicle

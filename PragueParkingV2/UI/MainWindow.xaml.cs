@@ -12,7 +12,7 @@ namespace PragueParkingUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        ParkingContext context = DoStuffExtensions.context;
+        ParkingContext context = Db.Instance;
         public MainWindow()
         {
             InitializeComponent();
@@ -20,6 +20,8 @@ namespace PragueParkingUI
             context.Database.Migrate();
             //RunSampleData();
             //AddParkingSpots();
+
+            dataGridMainDisplay.ItemsSource = DoStuffExtensions.GetMainViewData(context);
         }
 
         private void buttonAddVehicle_Click(object sender, RoutedEventArgs e)

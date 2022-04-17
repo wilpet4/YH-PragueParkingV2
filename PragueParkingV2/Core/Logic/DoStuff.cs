@@ -11,7 +11,7 @@ namespace PragueParkingCore
 {
     public class DoStuff
     {
-        ParkingContext context;
+        ParkingContext context = Db.Instance;
         public (List<string> cars, List<string> mcs) GetAllVehicles()
         {
             var cars = from c in context.Cars
@@ -40,7 +40,6 @@ namespace PragueParkingCore
     public static class DoStuffExtensions // flytta till egen fil senare kanske
     {
         public enum VehicleTypes { Car, MC } // Måste hålla denna uppdaterad. Inte kommit på ett bättre sätt än.
-        public static ParkingContext context = new ParkingContext();
         public static List<VehicleTypes> GetAllVehicleTypes()
         {
             List<VehicleTypes> result = new List<VehicleTypes>();
@@ -93,6 +92,24 @@ namespace PragueParkingCore
             result.AddRange(query.ToList());
             result.AddRange(query2.ToList());
             return result;
+        }
+
+        public static List<object> GetMainViewData(in ParkingContext context) // Skitful men fungerar. fixa senare!!!
+        {
+            List<Vehicle> result1 = new List<Vehicle>();
+            List<dynamic> result2 = new List<dynamic>();
+            var query1 = from c in context.Cars
+                        select c;
+            result1.AddRange(query1.ToList());
+            var query2 = from mc in context.MCs
+                    select mc;
+            result1.AddRange(query2.ToList());
+            result1.OrderBy(x => x.ParkingSpotId);
+            var query3 = from x in result1
+                         orderby x.ParkingSpotId
+                         select new { x.ParkingSpotId, x.Registration, x.Arrival };
+            result2.AddRange(query3.ToList());
+            return result2;
         }
     }
 }
