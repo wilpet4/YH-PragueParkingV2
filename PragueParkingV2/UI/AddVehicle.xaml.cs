@@ -12,6 +12,7 @@ namespace PragueParkingUI
     public partial class AddVehicle : Window
     {
         ParkingContext context = Db.Instance;
+        List<ParkingSpot> availableParkingSpots = new List<ParkingSpot>();
         public AddVehicle()
         {
             InitializeComponent();
@@ -22,13 +23,10 @@ namespace PragueParkingUI
             List<int> LoadAvailableParkingSpots()
             {
                 List<int> result = new List<int>();
-                var query = DoStuffExtensions.GetAvailableParkingSpots(context);
-                foreach (var pSpot in query)
+                availableParkingSpots = DoStuffExtensions.GetAvailableParkingSpots(context);
+                foreach (var pSpot in availableParkingSpots)
                 {
-                    if (!pSpot.Vehicles.Any()) // kanske dumt
-                    {
-                        result.Add(pSpot.ParkingSpotId);
-                    }
+                    result.Add(pSpot.ParkingSpotId);
                 }
                 return result;
             }
@@ -43,7 +41,7 @@ namespace PragueParkingUI
             // Kanske flytta detta till en egen metod.
             string reg = textBoxRegistration.Text;
             var vehicleInput = (DoStuffExtensions.VehicleTypes)comboBoxVehicleType.SelectedItem;
-            ParkingSpot p = DoStuffExtensions.GetParkingSpot(context, comboBoxParkingSpots.SelectedIndex);
+            ParkingSpot p = DoStuffExtensions.GetParkingSpot(context, availableParkingSpots[comboBoxParkingSpots.SelectedIndex].ParkingSpotId);
             switch ((DoStuffExtensions.VehicleTypes)comboBoxVehicleType.SelectedItem)
             {
                 case DoStuffExtensions.VehicleTypes.Car:

@@ -69,7 +69,7 @@ namespace PragueParkingCore
         }
         public static ParkingSpot GetParkingSpot(in ParkingContext context, in int id)
         {
-            int i = id + 1;
+            int i = id;
             var query = from p in context.ParkingSpots
                         where p.ParkingSpotId == i
                         select p;
