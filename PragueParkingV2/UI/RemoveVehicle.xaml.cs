@@ -23,8 +23,11 @@ namespace PragueParkingUI
         {
             List<Vehicle> vehicles = DoStuffExtensions.GetAllVehicles(context);
             var format = from v in vehicles
-                         select new { v.Parking.ParkingSpotId, v.Registration, v.Arrival };
-            dataGridVehicleSelection.ItemsSource = format.ToList();
+                         orderby v.ParkingSpotId
+                         select new { v.ParkingSpotId, v.Registration, v.Arrival };
+            List<dynamic> data = new List<dynamic>();
+            data.AddRange(format.ToList());
+            dataGridVehicleSelection.ItemsSource = data;
         }
         private void buttonRemove_Click(object sender, RoutedEventArgs e)
         {

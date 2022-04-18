@@ -15,5 +15,6 @@
         <TextBox x:Name="textboxSearch" HorizontalAlignment="Left" Margin="702,11,0,0" TextWrapping="Wrap" Text="search..." VerticalAlignment="Top" Width="120" Height="19"/>
         <Image Source="/Logo.png" HorizontalAlignment="Left" Height="100" Margin="790,424,0,0" VerticalAlignment="Top" Width="100"/>
         <DataGrid x:Name="dataGridMainDisplay" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="115,35,115,10"/>
+        <Button x:Name="buttonRefreshView" Content="X" HorizontalAlignment="Left" Margin="115,10,0,0" VerticalAlignment="Top" Height="20" Width="40" Click="buttonRefreshView_Click"/>
     </Grid>
 </Window>

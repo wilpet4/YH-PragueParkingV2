@@ -51,7 +51,9 @@ namespace PragueParkingUI
             }
             context.SaveChanges();
         }
-
-
+        private void buttonRefreshView_Click(object sender, RoutedEventArgs e)
+        {
+            dataGridMainDisplay.ItemsSource = DoStuffExtensions.GetMainViewData(context);
+        }
     }
 }
