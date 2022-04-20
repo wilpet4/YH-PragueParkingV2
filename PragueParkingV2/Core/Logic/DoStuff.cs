@@ -107,7 +107,7 @@ namespace PragueParkingCore
             result1.OrderBy(x => x.ParkingSpotId);
             var query3 = from x in result1
                          orderby x.ParkingSpotId
-                         select new { x.ParkingSpotId, x.Registration, x.Arrival };
+                         select new { x.ParkingSpotId, x.Registration, x.Arrival, Discriminator = x.GetType().Name}; //Manuellt lägger till Discriminator då det inte finns som en property.
             result2.AddRange(query3.ToList());
             return result2;
         }
