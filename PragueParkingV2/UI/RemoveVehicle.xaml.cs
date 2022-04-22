@@ -3,6 +3,7 @@ using System.Windows;
 using System.Linq;
 using PragueParkingCore;
 using System.Collections.Generic;
+using System;
 
 namespace PragueParkingUI
 {
@@ -36,12 +37,16 @@ namespace PragueParkingUI
         }
         private void buttonRemove_Click(object sender, RoutedEventArgs e)
         {
-            int i = dataGridVehicleSelection.SelectedIndex;
-            List<dynamic> data = FormatDataGrid();
-            if (data[i] != null)
+            foreach (var item in dataGridVehicleSelection.SelectedItems)
             {
-
+                if (item.GetType().BaseType == typeof(Vehicle))
+                {
+                    Vehicle v = (Vehicle)item;
+                    context.Remove(v);
+                }
             }
+            context.SaveChanges();
+            Close();
         }
     }
 }

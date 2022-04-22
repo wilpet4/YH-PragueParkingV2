@@ -87,20 +87,31 @@ namespace PragueParkingCore
 
         public static List<object> GetMainViewData(in ParkingContext context) // Skitful men fungerar. fixa senare!!!
         {
-            List<Vehicle> result1 = new List<Vehicle>();
-            List<dynamic> result2 = new List<dynamic>();
-            var query1 = from c in context.Cars
-                        select c;
+            //List<Vehicle> result1 = new List<Vehicle>();
+            //List<dynamic> result2 = new List<dynamic>();
+            //var query1 = from c in context.Cars
+            //            select c;
+            //result1.AddRange(query1.ToList());
+            //var query2 = from mc in context.MCs
+            //        select mc;
+            //result1.AddRange(query2.ToList());
+            //result1.OrderBy(x => x.ParkingSpotId);
+            //var query3 = from x in result1
+            //             orderby x.ParkingSpotId
+            //             select new { x.ParkingSpotId, x.Registration, x.Arrival, x.VehicleType};
+            //result2.AddRange(query3.ToList());
+            //return result2;
+
+            List<dynamic> result1 = new List<dynamic>();
+            var query1 = from p in context.ParkingSpots
+                         orderby p.ParkingSpotId
+                         select new { p.ParkingSpotId, p.Vehicles, p.Size };
             result1.AddRange(query1.ToList());
-            var query2 = from mc in context.MCs
-                    select mc;
-            result1.AddRange(query2.ToList());
-            result1.OrderBy(x => x.ParkingSpotId);
-            var query3 = from x in result1
-                         orderby x.ParkingSpotId
-                         select new { x.ParkingSpotId, x.Registration, x.Arrival, x.VehicleType};
-            result2.AddRange(query3.ToList());
-            return result2;
+            return result1;
+        }
+        public static void CheckParkingSpotCapacity(in ParkingContext context)
+        {
+
         }
     }
 }
