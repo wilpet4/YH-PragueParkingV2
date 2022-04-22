@@ -16,30 +16,31 @@ namespace PragueParkingUI
         public RemoveVehicle()
         {
             InitializeComponent();
-            FormatDataGrid();
+            SetDataGridSource();
 
         }
-        private void FormatDataGrid()
+        private List<dynamic> FormatDataGrid()
         {
             List<Vehicle> vehicles = DoStuffExtensions.GetAllVehicles(context);
             var format = from v in vehicles
                          orderby v.ParkingSpotId
-                         select new { v.ParkingSpotId, v.Registration, v.Arrival };
+                         select v;
             List<dynamic> data = new List<dynamic>();
             data.AddRange(format.ToList());
-            dataGridVehicleSelection.ItemsSource = data;
+            return data;
+        }
+        private void SetDataGridSource()
+        {
+            dataGridVehicleSelection.ItemsSource = FormatDataGrid();
+            //dataGridVehicleSelection
         }
         private void buttonRemove_Click(object sender, RoutedEventArgs e)
         {
-            if (dataGridVehicleSelection.SelectedItems.GetType() == System.Type.GetType("ParkingSpot"))
+            int i = dataGridVehicleSelection.SelectedIndex;
+            List<dynamic> data = FormatDataGrid();
+            if (data[i] != null)
             {
-                foreach (ParkingSpot item in dataGridVehicleSelection.SelectedItems)
-                {
-                    // Print receipts here!!!
-                    DoStuff.PrintReceipt();
-                    //
-                    item.Vehicles.Clear();
-                }
+
             }
         }
     }

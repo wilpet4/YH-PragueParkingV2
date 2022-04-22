@@ -12,15 +12,6 @@ namespace PragueParkingCore
     public class DoStuff
     {
         ParkingContext context = Db.Instance;
-        public (List<string> cars, List<string> mcs) GetAllVehicles()
-        {
-            var cars = from c in context.Cars
-                       select c.Registration;
-
-            var mcs = from mc in context.MCs
-                      select mc.Registration;
-            return (cars.ToList(), mcs.ToList());
-        }
         public void SupplyRemoveVehicleDataGrid(List<ParkingSpot> parkingSpots)
         {
             List<Vehicle> result = new List<Vehicle>();
@@ -107,7 +98,7 @@ namespace PragueParkingCore
             result1.OrderBy(x => x.ParkingSpotId);
             var query3 = from x in result1
                          orderby x.ParkingSpotId
-                         select new { x.ParkingSpotId, x.Registration, x.Arrival, Discriminator = x.GetType().Name}; //Manuellt lägger till Discriminator då det inte finns som en property.
+                         select new { x.ParkingSpotId, x.Registration, x.Arrival, x.VehicleType};
             result2.AddRange(query3.ToList());
             return result2;
         }

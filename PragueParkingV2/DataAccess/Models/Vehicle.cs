@@ -15,7 +15,7 @@ namespace PragueParkingDataAccess
         public byte Size { get; set; }
         public string? Registration { get; set; }
         public DateTime Arrival { get; set; }
-
+        [NotMapped] public string VehicleType { get { return GetType().Name; } }
         public int ParkingSpotId { get; set; }
         [Required] public ParkingSpot Parking { get; set; }
     }
