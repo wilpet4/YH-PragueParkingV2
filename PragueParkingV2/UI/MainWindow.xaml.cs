@@ -4,6 +4,7 @@ using PragueParkingCore;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 
 namespace PragueParkingUI
 {
@@ -13,11 +14,17 @@ namespace PragueParkingUI
     public partial class MainWindow : Window
     {
         ParkingContext context = Db.Instance;
+        XmlDocument xml = new XmlDocument();
         public MainWindow()
         {
             InitializeComponent();
-
-            context.Database.Migrate();
+            xml.Load(@"config.xml");
+            if (bool.Parse(xml.GetElementsByTagName("databasecreated").Item(0).InnerText) == false) // Om databasen inte finns
+            {
+                context.Database.Migrate();
+                xml.GetElementsByTagName("databasecreated").Item(0).InnerText = "True";
+                xml.Save(@"config.xml");
+            }
             //RunSampleData();
             //AddParkingSpots();
 

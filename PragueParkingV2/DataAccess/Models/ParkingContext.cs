@@ -2,12 +2,14 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using System.Linq;
+using System.Xml;
+using System;
 
 namespace PragueParkingDataAccess
 {
     public class ParkingContext : DbContext
     {
-        int amountOfParkingSpots = 32; // Denna ska in i en json/xml fil
+        int? parkingSpots = null;
         public ParkingContext() { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -16,6 +18,10 @@ namespace PragueParkingDataAccess
 
             string connectionString = 
             builder.Build().GetConnectionString("DefaultConnection");
+
+            XmlDocument xml = new XmlDocument();
+            xml.Load(@"config.xml");
+            parkingSpots = Int32.Parse(xml.GetElementsByTagName("parkingspots").Item(0).InnerText);
 
             if (optionsBuilder.IsConfigured == false)
             {
@@ -28,10 +34,13 @@ namespace PragueParkingDataAccess
             modelBuilder.Entity<ParkingGarage>().HasData(new ParkingGarage { GarageId = 1});
 
             int ParkingId = 1;
-            for (int i = 0; i < amountOfParkingSpots; i++)
+            if (parkingSpots != null)
             {
-                modelBuilder.Entity<ParkingSpot>().HasData(new ParkingSpot {ParkingGarageId = 1 ,ParkingSpotId = ParkingId});
-                ParkingId++;
+                for (int i = 0; i < parkingSpots; i++)
+                {
+                    modelBuilder.Entity<ParkingSpot>().HasData(new ParkingSpot { ParkingGarageId = 1, ParkingSpotId = ParkingId });
+                    ParkingId++;
+                }
             }
             #endregion
         }
