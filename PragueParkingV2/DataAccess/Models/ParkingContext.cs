@@ -1,11 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using System.Linq;
 
 namespace PragueParkingDataAccess
 {
     public class ParkingContext : DbContext
     {
+        int amountOfParkingSpots = 32; // Denna ska in i en json/xml fil
         public ParkingContext() { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -22,7 +24,16 @@ namespace PragueParkingDataAccess
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region Data Seeding
+            modelBuilder.Entity<ParkingGarage>().HasData(new ParkingGarage { GarageId = 1});
 
+            int ParkingId = 1;
+            for (int i = 0; i < amountOfParkingSpots; i++)
+            {
+                modelBuilder.Entity<ParkingSpot>().HasData(new ParkingSpot {ParkingGarageId = 1 ,ParkingSpotId = ParkingId});
+                ParkingId++;
+            }
+            #endregion
         }
         public DbSet<ParkingGarage> Garages { get; set; }
         public DbSet<ParkingSpot> ParkingSpots { get; set; }

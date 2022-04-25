@@ -14,6 +14,7 @@ namespace PragueParkingDataAccess
         public int ParkingSpotId { get; set; }
         public int Size { get; set; }
         public ICollection<Vehicle> Vehicles { get; set; } // null problem här.
+        public int ParkingGarageId { get; set; }
         [Required] public ParkingGarage Garage { get; set; }
     }
 }

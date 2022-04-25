@@ -7,8 +7,8 @@ namespace PragueParkingDataAccess
     {
         public ParkingGarage()
         {
-            ParkingSpots = new List<ParkingSpot>(); // Riktigt äckligt, borde inte användas, men gör så att listan
-        }                                           // inte ger ett null-error när man lägger in data för första gången
+            ParkingSpots = new List<ParkingSpot>();
+        }
         [Key]public int GarageId { get; set; }
         public ICollection<ParkingSpot> ParkingSpots { get; set; }
     }
