@@ -9,11 +9,11 @@ using PragueParkingDataAccess;
 
 #nullable disable
 
-namespace PragueParkingDataAccess.Migrations
+namespace WpfAppDataAccess.Migrations
 {
     [DbContext(typeof(ParkingContext))]
-    [Migration("20220425201435_InitialSeeded2")]
-    partial class InitialSeeded2
+    [Migration("20220425221605_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

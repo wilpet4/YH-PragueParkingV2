@@ -14,20 +14,11 @@ namespace PragueParkingUI
     public partial class MainWindow : Window
     {
         ParkingContext context = Db.Instance;
-        XmlDocument xml = new XmlDocument();
         public MainWindow()
         {
             InitializeComponent();
-            xml.Load(@"config.xml");
-            if (bool.Parse(xml.GetElementsByTagName("databasecreated").Item(0).InnerText) == false) // Om databasen inte finns
-            {
-                context.Database.Migrate();
-                xml.GetElementsByTagName("databasecreated").Item(0).InnerText = "True";
-                xml.Save(@"config.xml");
-            }
-            //RunSampleData();
-            //AddParkingSpots();
-
+            context.Database.Migrate(); //Problemet med migration är att all data seeding följer med.
+                                        //dvs ändringar i config.xml fungerar inte tills man gör en ny migration.
             dataGridMainDisplay.ItemsSource = DoStuffExtensions.GetMainViewData(context);
         }
 
@@ -40,23 +31,6 @@ namespace PragueParkingUI
         {
             RemoveVehicle removeVehiclePopup = new RemoveVehicle();
             removeVehiclePopup.Show();
-        }
-        private void RunSampleData()
-        {
-            ParkingGarage garage = new ParkingGarage();
-            context.Garages.Add(garage);
-            context.SaveChanges();
-        }
-        private void AddParkingSpots()
-        {
-            int garageSize = 8;
-            ParkingGarage garage = context.Garages.FirstOrDefault();
-            for (int i = 0; i < garageSize; i++)
-            {
-                ParkingSpot p = new ParkingSpot();
-                garage.ParkingSpots.Add(p);
-            }
-            context.SaveChanges();
         }
         private void buttonRefreshView_Click(object sender, RoutedEventArgs e)
         {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace PragueParkingDataAccess.Migrations
+namespace WpfAppDataAccess.Migrations
 {
     public partial class Initial : Migration
     {
@@ -13,12 +13,12 @@ namespace PragueParkingDataAccess.Migrations
                 name: "Garages",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    GarageId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Garages", x => x.Id);
+                    table.PrimaryKey("PK_Garages", x => x.GarageId);
                 });
 
             migrationBuilder.CreateTable(
@@ -28,7 +28,7 @@ namespace PragueParkingDataAccess.Migrations
                     ParkingSpotId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Size = table.Column<int>(type: "int", nullable: false),
-                    ParkingGarageId = table.Column<int>(type: "int", nullable: true)
+                    ParkingGarageId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -37,7 +37,8 @@ namespace PragueParkingDataAccess.Migrations
                         name: "FK_ParkingSpots_Garages_ParkingGarageId",
                         column: x => x.ParkingGarageId,
                         principalTable: "Garages",
-                        principalColumn: "Id");
+                        principalColumn: "GarageId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -61,6 +62,34 @@ namespace PragueParkingDataAccess.Migrations
                         principalTable: "ParkingSpots",
                         principalColumn: "ParkingSpotId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Garages",
+                column: "GarageId",
+                value: 1);
+
+            migrationBuilder.InsertData(
+                table: "ParkingSpots",
+                columns: new[] { "ParkingSpotId", "ParkingGarageId", "Size" },
+                values: new object[,]
+                {
+                    { 1, 1, 4 },
+                    { 2, 1, 4 },
+                    { 3, 1, 4 },
+                    { 4, 1, 4 },
+                    { 5, 1, 4 },
+                    { 6, 1, 4 },
+                    { 7, 1, 4 },
+                    { 8, 1, 4 },
+                    { 9, 1, 4 },
+                    { 10, 1, 4 },
+                    { 11, 1, 4 },
+                    { 12, 1, 4 },
+                    { 13, 1, 4 },
+                    { 14, 1, 4 },
+                    { 15, 1, 4 },
+                    { 16, 1, 4 }
                 });
 
             migrationBuilder.CreateIndex(
