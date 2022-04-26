@@ -17,8 +17,10 @@ namespace PragueParkingUI
         public MainWindow()
         {
             InitializeComponent();
-            context.Database.Migrate(); //Problemet med migration är att all data seeding följer med.
-                                        //dvs ändringar i config.xml fungerar inte tills man gör en ny migration.
+            if (context.Database.CanConnect() == false) // Nu kör den bara migrations när det behövs.
+            {
+                context.Database.Migrate();
+            }
             dataGridMainDisplay.ItemsSource = DoStuffExtensions.GetMainViewData(context);
         }
 
