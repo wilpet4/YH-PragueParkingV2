@@ -46,10 +46,17 @@ namespace PragueParkingUI
             {
                 case DoStuffExtensions.VehicleTypes.Car:
                     Car newCar = new Car(reg);
-                    p.Vehicles.Add(newCar);
+                    if (DoStuffExtensions.CheckParkingSpotCapacity(context, p, newCar) == true)
+                    {
+                        p.Vehicles.Add(newCar);
+                    }
                     break;
                 case DoStuffExtensions.VehicleTypes.MC:
                     MC newMC = new MC(reg);
+                    if (DoStuffExtensions.CheckParkingSpotCapacity(context, p, newMC) == true)
+                    {
+                        p.Vehicles.Add(newMC);
+                    }
                     p.Vehicles.Add(newMC);
                     break;
                 default:

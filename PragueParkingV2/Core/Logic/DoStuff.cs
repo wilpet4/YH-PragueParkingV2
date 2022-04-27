@@ -109,9 +109,21 @@ namespace PragueParkingCore
             result1.AddRange(query1.ToList());
             return result1;
         }
-        public static void CheckParkingSpotCapacity(in ParkingContext context)
+        public static bool CheckParkingSpotCapacity(in ParkingContext context, in ParkingSpot parkingSpot, Vehicle newVehicle)
         {
-
+            int sum = 0;
+            foreach (Vehicle item in parkingSpot.Vehicles)
+            {
+                sum += item.Size;
+            }
+            if (sum + newVehicle.Size <= parkingSpot.Size)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
