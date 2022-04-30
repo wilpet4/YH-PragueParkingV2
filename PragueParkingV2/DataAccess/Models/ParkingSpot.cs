@@ -11,6 +11,10 @@ namespace PragueParkingDataAccess
             Vehicles = new List<Vehicle>();
             Size = 4;
         }
+        public ParkingSpot(in int size)
+        {
+            Size = size;
+        }
         public int ParkingSpotId { get; set; }
         public int Size { get; set; }
         public ICollection<Vehicle> Vehicles { get; set; } // null problem här.

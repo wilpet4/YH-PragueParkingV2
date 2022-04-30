@@ -2,5 +2,7 @@
 <root>
 	<data>
 		<parkingspots>100</parkingspots>
+		<carprice>20</carprice>
+		<mcprice>10</mcprice>
 	</data>
 </root>

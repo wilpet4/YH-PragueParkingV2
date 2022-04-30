@@ -17,7 +17,7 @@ namespace PragueParkingUI
         public MainWindow()
         {
             InitializeComponent();
-            if (context.Database.CanConnect() == false) // Nu kör den bara migrations när det behövs.
+            if (context.Database.CanConnect() == false) // Nu kör den bara migrations när databasen inte finns.
             {
                 context.Database.Migrate();
             }
