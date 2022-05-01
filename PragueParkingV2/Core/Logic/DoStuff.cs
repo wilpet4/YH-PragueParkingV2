@@ -111,5 +111,14 @@ namespace PragueParkingCore
                 return false;
             }
         }
+        public static int GetParkingSpotCapacity(in ParkingContext context, in ParkingSpot parkingSpot)
+        {
+            int sum = parkingSpot.Size;
+            foreach (Vehicle v in parkingSpot.Vehicles)
+            {
+                sum -= v.Size;
+            }
+            return sum;
+        }
     }
 }

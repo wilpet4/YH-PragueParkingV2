@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using System.Windows.Controls;
 
 namespace PragueParkingUI
 {
@@ -23,7 +24,30 @@ namespace PragueParkingUI
             }
             dataGridMainDisplay.ItemsSource = DoStuffExtensions.GetMainViewData(context);
         }
+        private void DisplayMainViewData()
+        {
+            List<ParkingSpot> data = DoStuffExtensions.GetAllParkingSpots(context);
+            dataGridMainDisplay.ItemsSource = DoStuffExtensions.GetMainViewData(context);
+            DataGridCell cell;
+            foreach (ParkingSpot item in data)
+            {
+                int capacity = DoStuffExtensions.GetParkingSpotCapacity(context, item);
+                if (capacity == item.Size)
+                {
+                    // Set cell green
+                    dataGridMainDisplay.Items.Contains(item);
 
+                }
+                else if (capacity == 0)
+                {
+                    // Set cell red
+                }
+                else if (capacity > 0 && capacity < item.Size)
+                {
+                    // Sett cell yellow
+                }
+            }
+        }
         private void buttonAddVehicle_Click(object sender, RoutedEventArgs e)
         {
             AddVehicle addVehiclePopup = new AddVehicle();
