@@ -8,8 +8,8 @@
         Title="RemoveVehicle" Height="550" Width="450" SizeToContent="WidthAndHeight">
     <Grid>
         <Button Name="buttonRemove" Content="Remove" HorizontalAlignment="Left" Margin="360,484,0,0" VerticalAlignment="Top" Width="80" Height="40" Click="buttonRemove_Click"/>
-        <DataGrid Name="dataGridVehicleSelection" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,10,0" VerticalAlignment="Top" 
-                  MaxWidth="430" MaxHeight="257" HorizontalContentAlignment="Stretch"  ColumnWidth="Auto" IsReadOnly="True" Height="257">
+        <DataGrid Name="dataGridVehicleSelection" AutoGenerateColumns="False" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,95,0" VerticalAlignment="Top" 
+                  MaxWidth="345" MaxHeight="494" HorizontalContentAlignment="Stretch"  ColumnWidth="Auto" IsReadOnly="True" Height="494">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ParkingSpotId" Binding="{Binding ParkingSpotId}"/>
                 <DataGridTextColumn Header="Registration" Binding="{Binding Registration}"/>
@@ -17,5 +17,7 @@
                 <DataGridTextColumn Header="Discriminator" Binding="{Binding VehicleType}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <TextBox x:Name="textBoxSearch" HorizontalAlignment="Left" Margin="360,10,0,0" TextWrapping="Wrap" Text="search..." VerticalAlignment="Top" Width="80"/>
+        <Button x:Name="buttonSearch" Content="Search" HorizontalAlignment="Left" Margin="380,31,0,0" VerticalAlignment="Top" Height="40" Width="40" Click="buttonSearch_Click"/>
     </Grid>
 </Window>

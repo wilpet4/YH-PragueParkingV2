@@ -48,5 +48,15 @@ namespace PragueParkingUI
             context.SaveChanges();
             Close();
         }
+
+        private void buttonSearch_Click(object sender, RoutedEventArgs e)
+        {
+            char[] search = textBoxSearch.Text.ToLower().ToCharArray();
+            List<Vehicle> vehicles = DoStuffExtensions.GetAllVehicles(context);
+            for(int i = 0; i < vehicles.Count; i++)
+            {
+
+            }
+        }
     }
 }
