@@ -7,12 +7,35 @@ using System.Threading.Tasks;
 using PragueParkingDataAccess;
 using System.Collections;
 using System.IO;
+using System.Xml.Linq;
 
 namespace PragueParkingCore
 {
     public class DoStuff
     {
         ParkingContext context = Db.Instance;
+        XDocument configDocument;
+        public void LoadSampleData()
+        {
+            LoadConfig();
+            int parkingSpots = 0;
+            int.TryParse(configDocument.Descendants("parkingspots").First().Value, out parkingSpots);
+            if (context.Garages.Any() == false)
+            {
+                context.Garages.Add(new ParkingGarage());
+                context.SaveChanges();
+            }
+            for (int i = 0; i < parkingSpots; i++)
+            {
+                ParkingSpot p = new ParkingSpot { ParkingGarageId = 1 };
+                context.Garages.FirstOrDefault().ParkingSpots.Add(p);
+            }
+            context.SaveChanges();
+            void LoadConfig()
+            {
+                configDocument = XDocument.Load(@"config.xml");
+            }
+        }
         public void SupplyRemoveVehicleDataGrid(List<ParkingSpot> parkingSpots)
         {
             List<Vehicle> result = new List<Vehicle>();

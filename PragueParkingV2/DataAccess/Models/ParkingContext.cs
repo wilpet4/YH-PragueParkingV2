@@ -30,19 +30,7 @@ namespace PragueParkingDataAccess
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            #region Data Seeding
-            modelBuilder.Entity<ParkingGarage>().HasData(new ParkingGarage { GarageId = 1});
 
-            int ParkingId = 1;
-            if (parkingSpots != null)
-            {
-                for (int i = 0; i < parkingSpots; i++)
-                {
-                    modelBuilder.Entity<ParkingSpot>().HasData(new ParkingSpot { ParkingGarageId = 1, ParkingSpotId = ParkingId });
-                    ParkingId++;
-                }
-            }
-            #endregion
         }
         public DbSet<ParkingGarage> Garages { get; set; }
         public DbSet<ParkingSpot> ParkingSpots { get; set; }
