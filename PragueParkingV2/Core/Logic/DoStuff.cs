@@ -47,7 +47,7 @@ namespace PragueParkingCore
                 }
             }
         }
-        public static void PrintReceipt()
+        public static void PrintReceipt(in Vehicle vehicle)
         {
             throw new NotImplementedException();
         }

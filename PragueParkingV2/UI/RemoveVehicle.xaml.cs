@@ -30,6 +30,15 @@ namespace PragueParkingUI
             data.AddRange(format.ToList());
             return data;
         }
+        private List<dynamic> FormatDataGrid(in List<Vehicle> vehicles)
+        {
+            var format = from v in vehicles
+                         orderby v.ParkingSpotId
+                         select v;
+            List<dynamic> data = new List<dynamic>();
+            data.AddRange(format.ToList());
+            return data;
+        }
         private void SetDataGridSource()
         {
             dataGridVehicleSelection.ItemsSource = FormatDataGrid();
@@ -49,14 +58,32 @@ namespace PragueParkingUI
             Close();
         }
 
-        private void buttonSearch_Click(object sender, RoutedEventArgs e)
+        private void buttonSearch_Click(object sender, RoutedEventArgs e) // Fungerar men inte rätt.
         {
+            Dictionary<Vehicle, int> container = new Dictionary<Vehicle, int>();
             char[] search = textBoxSearch.Text.ToLower().ToCharArray();
             List<Vehicle> vehicles = DoStuffExtensions.GetAllVehicles(context);
             for(int i = 0; i < vehicles.Count; i++)
             {
-
+                int counter = 0;
+                for (int j = 0; j < search.Length; j++)
+                {
+                    if (vehicles[i].Registration.ToLower().Contains(search[j]))
+                    {
+                        counter++;
+                    }
+                }
+                if (counter > 0)
+                {
+                    container.Add(vehicles[i], counter);
+                }
             }
+            List<Vehicle> searchResultList = new List<Vehicle>();
+            foreach (var item in container.OrderBy(x => x.Value))
+            {
+                searchResultList.Add(item.Key);
+            }
+            dataGridVehicleSelection.ItemsSource = FormatDataGrid(searchResultList);
         }
     }
 }
