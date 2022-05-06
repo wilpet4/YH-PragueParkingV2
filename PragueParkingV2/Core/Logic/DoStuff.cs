@@ -57,9 +57,13 @@ namespace PragueParkingCore
                 sw.WriteLine($"Departure Time: {DateTime.Now}");
             }
         }
-        private void CalculatePriceTotal()
+        private void CalculatePriceTotal(in Vehicle vehicle)
         {
-            foreach (DoStuffExtensions.VehicleTypes item in Enum.GetValues(typeof(DoStuffExtensions.VehicleTypes)))
+            if (int.TryParse(configDocument.Descendants($"{vehicle.VehicleType.ToLower()}price").First().Value, out int price))
+            {
+
+            }
+            else
             {
 
             }
