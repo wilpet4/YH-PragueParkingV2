@@ -47,9 +47,22 @@ namespace PragueParkingCore
                 }
             }
         }
-        public static void PrintReceipt(in Vehicle vehicle)
+        public void PrintReceipt(in Vehicle vehicle)
         {
-            throw new NotImplementedException();
+            using (StreamWriter sw = File.CreateText($"{DateTime.Now.Date}.{vehicle.Registration}.{vehicle.ParkingSpotId}"))
+            {
+                sw.WriteLine($"Registration: {vehicle.Registration}");
+                sw.WriteLine($"Parking: {vehicle.ParkingSpotId}");
+                sw.WriteLine($"Arrival Time: {vehicle.Arrival}");
+                sw.WriteLine($"Departure Time: {DateTime.Now}");
+            }
+        }
+        private void CalculatePriceTotal()
+        {
+            foreach (DoStuffExtensions.VehicleTypes item in Enum.GetValues(typeof(DoStuffExtensions.VehicleTypes)))
+            {
+
+            }
         }
     }
     public static class DoStuffExtensions // flytta till egen fil senare kanske
