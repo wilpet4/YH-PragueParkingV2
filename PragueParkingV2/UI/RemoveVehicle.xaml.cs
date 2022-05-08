@@ -51,6 +51,7 @@ namespace PragueParkingUI
                 if (item.GetType().BaseType == typeof(Vehicle))
                 {
                     Vehicle v = (Vehicle)item;
+                    doStuff.PrintReceipt(v);
                     context.Remove(v);
                 }
             }

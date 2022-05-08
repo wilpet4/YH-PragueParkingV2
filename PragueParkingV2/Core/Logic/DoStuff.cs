@@ -49,12 +49,20 @@ namespace PragueParkingCore
         }
         public void PrintReceipt(in Vehicle vehicle)
         {
-            using (StreamWriter sw = File.CreateText($"{DateTime.Now.Date}.{vehicle.Registration}.{vehicle.ParkingSpotId}"))
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string cleanDate = DateTime.Now.Date.ToString().Replace(':', '.');
+            string fileName = $"{cleanDate}.{vehicle.Registration}.{vehicle.ParkingSpotId}.txt";
+            if (Directory.Exists($@"{basePath}\Receipts") == false)
+            {
+                Directory.CreateDirectory($@"{basePath}\Receipts");
+            }
+            using (StreamWriter sw = File.CreateText($@"{basePath}\Receipts\{fileName}"))
             {
                 sw.WriteLine($"Registration: {vehicle.Registration}");
                 sw.WriteLine($"Parking: {vehicle.ParkingSpotId}");
                 sw.WriteLine($"Arrival Time: {vehicle.Arrival}");
                 sw.WriteLine($"Departure Time: {DateTime.Now}");
+                // Räkna ut pris här
             }
         }
         private void CalculatePriceTotal(in Vehicle vehicle)
