@@ -24,6 +24,10 @@ namespace PragueParkingUI
                 context.Database.Migrate();
                 doStuff.LoadSampleData();
             }
+            else
+            {
+                doStuff.LoadConfig();
+            }
             dataGridMainDisplay.ItemsSource = DoStuffExtensions.GetMainViewData(context);
         }
         private void DisplayMainViewData()

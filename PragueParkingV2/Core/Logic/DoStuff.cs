@@ -13,6 +13,10 @@ namespace PragueParkingCore
 {
     public class DoStuff
     {
+        DoStuff()
+        {
+            LoadConfig(); // Läser in xml-filen.
+        }
         ParkingContext context = Db.Instance;
         XDocument configDocument;
         public void LoadSampleData()
@@ -31,10 +35,10 @@ namespace PragueParkingCore
                 context.Garages.FirstOrDefault().ParkingSpots.Add(p);
             }
             context.SaveChanges();
-            void LoadConfig()
-            {
-                configDocument = XDocument.Load(@"config.xml");
-            }
+        }
+        private void LoadConfig()
+        {
+            configDocument = XDocument.Load(@"config.xml");
         }
         public void SupplyRemoveVehicleDataGrid(List<ParkingSpot> parkingSpots)
         {
@@ -62,19 +66,35 @@ namespace PragueParkingCore
                 sw.WriteLine($"Parking: {vehicle.ParkingSpotId}");
                 sw.WriteLine($"Arrival Time: {vehicle.Arrival}");
                 sw.WriteLine($"Departure Time: {DateTime.Now}");
+                sw.WriteLine($"Price: {CalculatePriceTotal(vehicle)}CZK");
                 // Räkna ut pris här
             }
         }
-        private void CalculatePriceTotal(in Vehicle vehicle)
+        private int CalculatePriceTotal(in Vehicle vehicle)
         {
+            int result = 0;
+            DateTime arrival = vehicle.Arrival;
+            DateTime departure = DateTime.Now;
+            TimeSpan time = departure - arrival;
+            double minutesParked = time.TotalMinutes;
+            short freeTime = 10;
+            short counter = 60;
             if (int.TryParse(configDocument.Descendants($"{vehicle.VehicleType.ToLower()}price").First().Value, out int price))
             {
-
+                for (int i = 0; i < minutesParked; i++)
+                {
+                    if (i > freeTime)
+                    {
+                        counter++;
+                        if (counter >= 60)
+                        {
+                            result += price;
+                            counter = 0;
+                        }
+                    }
+                }
             }
-            else
-            {
-
-            }
+            return result;
         }
     }
 }
