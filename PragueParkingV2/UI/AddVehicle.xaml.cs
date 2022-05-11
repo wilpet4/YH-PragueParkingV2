@@ -3,6 +3,7 @@ using PragueParkingDataAccess;
 using PragueParkingCore;
 using System.Linq;
 using System.Collections.Generic;
+using System.Windows.Controls;
 
 namespace PragueParkingUI
 {
@@ -65,6 +66,15 @@ namespace PragueParkingUI
             context.SaveChanges();
             //
             Close();
+        }
+        private void comboBoxVehicleType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            comboBoxParkingSpots.IsEnabled = true;
+        }
+
+        private void comboBoxParkingSpots_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            buttonAdd.IsEnabled = true;
         }
     }
 }
