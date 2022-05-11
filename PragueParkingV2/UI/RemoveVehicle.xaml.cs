@@ -3,7 +3,6 @@ using System.Windows;
 using System.Linq;
 using PragueParkingCore;
 using System.Collections.Generic;
-using System;
 
 namespace PragueParkingUI
 {
@@ -18,7 +17,6 @@ namespace PragueParkingUI
         {
             InitializeComponent();
             SetDataGridSource();
-
         }
         private List<dynamic> FormatDataGrid()
         {
@@ -42,7 +40,6 @@ namespace PragueParkingUI
         private void SetDataGridSource()
         {
             dataGridVehicleSelection.ItemsSource = FormatDataGrid();
-            //dataGridVehicleSelection
         }
         private void buttonRemove_Click(object sender, RoutedEventArgs e)
         {
