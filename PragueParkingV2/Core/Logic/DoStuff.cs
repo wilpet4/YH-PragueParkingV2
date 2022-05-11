@@ -13,7 +13,7 @@ namespace PragueParkingCore
 {
     public class DoStuff
     {
-        DoStuff()
+        public DoStuff()
         {
             LoadConfig(); // Läser in xml-filen.
         }
@@ -36,7 +36,7 @@ namespace PragueParkingCore
             }
             context.SaveChanges();
         }
-        private void LoadConfig()
+        public void LoadConfig()
         {
             configDocument = XDocument.Load(@"config.xml");
         }
@@ -56,19 +56,25 @@ namespace PragueParkingCore
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             string cleanDate = DateTime.Now.Date.ToString().Replace(':', '.');
             string fileName = $"{cleanDate}.{vehicle.Registration}.{vehicle.ParkingSpotId}.txt";
+            int price = CalculatePriceTotal(vehicle);
             if (Directory.Exists($@"{basePath}\Receipts") == false)
             {
                 Directory.CreateDirectory($@"{basePath}\Receipts");
             }
+            context.Receipts.Add(new Receipt { Registration = vehicle.Registration, 
+                                               ParkingSpotId = vehicle.ParkingSpotId, 
+                                               Arrival = vehicle.Arrival, 
+                                               Departure = DateTime.Now, 
+                                               Price = price});
             using (StreamWriter sw = File.CreateText($@"{basePath}\Receipts\{fileName}"))
             {
                 sw.WriteLine($"Registration: {vehicle.Registration}");
                 sw.WriteLine($"Parking: {vehicle.ParkingSpotId}");
                 sw.WriteLine($"Arrival Time: {vehicle.Arrival}");
                 sw.WriteLine($"Departure Time: {DateTime.Now}");
-                sw.WriteLine($"Price: {CalculatePriceTotal(vehicle)}CZK");
-                // Räkna ut pris här
+                sw.WriteLine($"Price: {price}CZK");
             }
+            context.SaveChanges();
         }
         private int CalculatePriceTotal(in Vehicle vehicle)
         {

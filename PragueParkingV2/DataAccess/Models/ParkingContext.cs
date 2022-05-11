@@ -36,5 +36,6 @@ namespace PragueParkingDataAccess
         public DbSet<ParkingSpot> ParkingSpots { get; set; }
         public DbSet<Car>? Cars { get; set; }
         public DbSet<MC>? MCs { get; set; }
+        public DbSet<Receipt> Receipts { get; set; }
     }
 }
