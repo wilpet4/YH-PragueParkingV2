@@ -70,6 +70,7 @@ namespace PragueParkingUI
         private void comboBoxVehicleType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             comboBoxParkingSpots.IsEnabled = true;
+            // Fixa så att comboBoxParkingSpots visar rätt p-platser!
         }
 
         private void comboBoxParkingSpots_SelectionChanged(object sender, SelectionChangedEventArgs e)
