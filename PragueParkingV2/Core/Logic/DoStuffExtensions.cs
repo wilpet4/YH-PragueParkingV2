@@ -60,15 +60,13 @@ namespace PragueParkingCore
             result.AddRange(query2.ToList());
             return result;
         }
-
-        public static List<object> GetMainViewData(in ParkingContext context) // Skitful men fungerar. fixa senare!!!
+        public static List<ParkingSpot> GetMainViewData(in ParkingContext context)
         {
-            List<dynamic> result1 = new List<dynamic>();
-            var query1 = from p in context.ParkingSpots
-                         orderby p.ParkingSpotId
-                         select new { p.ParkingSpotId, p.Vehicles, p.Size };
-            result1.AddRange(query1.ToList());
-            return result1;
+            var query = from p in context.ParkingSpots
+                        orderby p.ParkingSpotId
+                        select p;
+            List<ParkingSpot> result = query.ToList();
+            return result;
         }
         public static bool CheckParkingSpotCapacity(in ParkingContext context, in ParkingSpot parkingSpot, Vehicle newVehicle)
         {
