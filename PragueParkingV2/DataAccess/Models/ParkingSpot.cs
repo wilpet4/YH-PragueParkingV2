@@ -18,7 +18,7 @@ namespace PragueParkingDataAccess
         public int ParkingSpotId { get; set; }
         public int Size { get; set; }
         public ICollection<Vehicle> Vehicles { get; set; }
-        [NotMapped] public string VehiclesString 
+        [NotMapped] public string VehiclesString // Något ful property, finns säkeret ett bättre sätt, men fungerar bra nog.
         { 
             get 
             {
@@ -29,7 +29,35 @@ namespace PragueParkingDataAccess
                 }
                 return result;
             } 
-        } // Något ful property, finns säkeret ett bättre sätt, men fungerar bra nog.
+        }
+        [NotMapped] public string CellColor
+        {
+            get
+            {
+                int sum = Size; 
+                string result = string.Empty;
+                foreach (var item in Vehicles)
+                {
+                    sum -= item.Size;
+                }
+                if (sum >= Size)
+                {
+                    //Set Cell Green
+                    result = "green";
+                }
+                if (sum <= 0)
+                {
+                    //Set Cell Red
+                    result = "red";
+                }
+                if (sum > 0 & sum < Size)
+                {
+                    //Set Cell Yellow
+                    result = "yellow";
+                }
+                return result;
+            }
+        }
         public int ParkingGarageId { get; set; }
         [Required] public ParkingGarage Garage { get; set; }
     }

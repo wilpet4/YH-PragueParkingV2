@@ -19,14 +19,11 @@ namespace PragueParkingUI
         public MainWindow()
         {
             InitializeComponent();
+            doStuff.LoadConfig();
             if (context.Database.CanConnect() == false) // Nu kör den bara migrations när databasen inte finns.
             {
                 context.Database.Migrate();
                 doStuff.LoadSampleData();
-            }
-            else
-            {
-                doStuff.LoadConfig();
             }
             dataGridMainDisplay.ItemsSource = DoStuffExtensions.GetMainViewData(context);
         }
@@ -65,6 +62,11 @@ namespace PragueParkingUI
             removeVehiclePopup.Show();
         }
         private void buttonRefreshView_Click(object sender, RoutedEventArgs e) // MEMORY LEAK
+        {
+            dataGridMainDisplay.ItemsSource = DoStuffExtensions.GetMainViewData(context);
+        }
+
+        private void dataGridMainDisplay_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
         {
             dataGridMainDisplay.ItemsSource = DoStuffExtensions.GetMainViewData(context);
         }

@@ -58,7 +58,6 @@ namespace PragueParkingUI
                     {
                         p.Vehicles.Add(newMC);
                     }
-                    p.Vehicles.Add(newMC);
                     break;
                 default:
                     break;
