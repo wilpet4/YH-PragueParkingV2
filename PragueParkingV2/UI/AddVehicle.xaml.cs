@@ -17,21 +17,7 @@ namespace PragueParkingUI
         public AddVehicle()
         {
             InitializeComponent();
-            comboBoxParkingSpots.ItemsSource = LoadAvailableParkingSpots();
             comboBoxVehicleType.ItemsSource = DoStuffExtensions.GetAllVehicleTypes();
-
-            #region Local Functions
-            List<int> LoadAvailableParkingSpots()
-            {
-                List<int> result = new List<int>();
-                availableParkingSpots = DoStuffExtensions.GetAvailableParkingSpots(context);
-                foreach (var pSpot in availableParkingSpots)
-                {
-                    result.Add(pSpot.ParkingSpotId);
-                }
-                return result;
-            }
-            #endregion
         }
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -50,6 +36,11 @@ namespace PragueParkingUI
                     if (DoStuffExtensions.CheckParkingSpotCapacity(context, p, newCar) == true)
                     {
                         p.Vehicles.Add(newCar);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("The selected spot is too full. Cannot add vehicle.", "Error");
                     }
                     break;
                 case DoStuffExtensions.VehicleTypes.MC:
@@ -57,18 +48,33 @@ namespace PragueParkingUI
                     if (DoStuffExtensions.CheckParkingSpotCapacity(context, p, newMC) == true)
                     {
                         p.Vehicles.Add(newMC);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("The selected spot is too full. Cannot add vehicle.", "Error");
                     }
                     break;
                 default:
                     break;
             }
-            context.SaveChanges();
             //
             Close();
+        }
+        private List<int> LoadAvailableParkingSpots()
+        {
+            List<int> result = new List<int>();
+            availableParkingSpots = DoStuffExtensions.GetAvailableParkingSpots(context);
+            foreach (var pSpot in availableParkingSpots)
+            {
+                result.Add(pSpot.ParkingSpotId);
+            }
+            return result;
         }
         private void comboBoxVehicleType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             comboBoxParkingSpots.IsEnabled = true;
+            comboBoxParkingSpots.ItemsSource = LoadAvailableParkingSpots();
             // Fixa så att comboBoxParkingSpots visar rätt p-platser!
         }
 

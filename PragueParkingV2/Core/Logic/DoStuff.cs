@@ -32,6 +32,14 @@ namespace PragueParkingCore
             for (int i = 0; i < parkingSpots; i++)
             {
                 ParkingSpot p = new ParkingSpot { ParkingGarageId = 1 };
+                if (i < 8)
+                {
+                    p.Size = 2;
+                }
+                if (i > 90)
+                {
+                    p.Size = 6;
+                }
                 context.Garages.FirstOrDefault().ParkingSpots.Add(p);
             }
             context.SaveChanges();
