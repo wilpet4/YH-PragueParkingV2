@@ -8,6 +8,7 @@ using PragueParkingDataAccess;
 using System.Collections;
 using System.IO;
 using System.Xml.Linq;
+using System.Windows;
 
 namespace PragueParkingCore
 {
@@ -109,6 +110,38 @@ namespace PragueParkingCore
                 }
             }
             return result;
+        }
+        public void AddNewVehicleToParkingSpot(in DoStuffExtensions.VehicleTypes type, in ParkingSpot p, in string reg)
+        {
+            switch (type)
+            {
+                case DoStuffExtensions.VehicleTypes.Car:
+                    Car newCar = new Car(reg);
+                    if (DoStuffExtensions.CheckParkingSpotCapacity(context, p, newCar) == true)
+                    {
+                        p.Vehicles.Add(newCar);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("The selected spot is too full. Cannot add vehicle.", "Error");
+                    }
+                    break;
+                case DoStuffExtensions.VehicleTypes.MC:
+                    MC newMC = new MC(reg);
+                    if (DoStuffExtensions.CheckParkingSpotCapacity(context, p, newMC) == true)
+                    {
+                        p.Vehicles.Add(newMC);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        MessageBox.Show("The selected spot is too full. Cannot add vehicle.", "Error");
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

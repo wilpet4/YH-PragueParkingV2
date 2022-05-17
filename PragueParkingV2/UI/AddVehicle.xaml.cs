@@ -14,6 +14,7 @@ namespace PragueParkingUI
     {
         ParkingContext context = Db.Instance;
         List<ParkingSpot> availableParkingSpots = new List<ParkingSpot>();
+        DoStuff doStuff = new DoStuff();
         public AddVehicle()
         {
             InitializeComponent();
@@ -29,35 +30,7 @@ namespace PragueParkingUI
             string reg = textBoxRegistration.Text;
             var vehicleInput = (DoStuffExtensions.VehicleTypes)comboBoxVehicleType.SelectedItem;
             ParkingSpot p = DoStuffExtensions.GetParkingSpot(context, availableParkingSpots[comboBoxParkingSpots.SelectedIndex].ParkingSpotId);
-            switch ((DoStuffExtensions.VehicleTypes)comboBoxVehicleType.SelectedItem)
-            {
-                case DoStuffExtensions.VehicleTypes.Car:
-                    Car newCar = new Car(reg);
-                    if (DoStuffExtensions.CheckParkingSpotCapacity(context, p, newCar) == true)
-                    {
-                        p.Vehicles.Add(newCar);
-                        context.SaveChanges();
-                    }
-                    else
-                    {
-                        MessageBox.Show("The selected spot is too full. Cannot add vehicle.", "Error");
-                    }
-                    break;
-                case DoStuffExtensions.VehicleTypes.MC:
-                    MC newMC = new MC(reg);
-                    if (DoStuffExtensions.CheckParkingSpotCapacity(context, p, newMC) == true)
-                    {
-                        p.Vehicles.Add(newMC);
-                        context.SaveChanges();
-                    }
-                    else
-                    {
-                        MessageBox.Show("The selected spot is too full. Cannot add vehicle.", "Error");
-                    }
-                    break;
-                default:
-                    break;
-            }
+            doStuff.AddNewVehicleToParkingSpot((DoStuffExtensions.VehicleTypes)comboBoxVehicleType.SelectedItem, p, reg);
             //
             Close();
         }

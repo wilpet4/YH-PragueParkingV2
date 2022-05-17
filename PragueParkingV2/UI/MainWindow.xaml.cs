@@ -27,30 +27,6 @@ namespace PragueParkingUI
             }
             dataGridMainDisplay.ItemsSource = DoStuffExtensions.GetMainViewData(context);
         }
-        //private void DisplayMainViewData()
-        //{
-        //    List<ParkingSpot> data = DoStuffExtensions.GetAllParkingSpots(context);
-        //    dataGridMainDisplay.ItemsSource = DoStuffExtensions.GetMainViewData(context);
-        //    DataGridCell cell;
-        //    foreach (ParkingSpot item in data)
-        //    {
-        //        int capacity = DoStuffExtensions.GetParkingSpotCapacity(context, item);
-        //        if (capacity == item.Size)
-        //        {
-        //            // Set cell green
-        //            dataGridMainDisplay.Items.Contains(item);
-
-        //        }
-        //        else if (capacity == 0)
-        //        {
-        //            // Set cell red
-        //        }
-        //        else if (capacity > 0 && capacity < item.Size)
-        //        {
-        //            // Sett cell yellow
-        //        }
-        //    }
-        //}
         private void buttonAddVehicle_Click(object sender, RoutedEventArgs e)
         {
             AddVehicle addVehiclePopup = new AddVehicle();
@@ -69,6 +45,11 @@ namespace PragueParkingUI
         private void dataGridMainDisplay_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e) // Fungerar lite konstigt. uppdaterar inte direkt, ibland måste 
         {                                                                                                          // man scrolla lite eller trycka på datagrid för att den ska uppdateras
             dataGridMainDisplay.ItemsSource = DoStuffExtensions.GetMainViewData(context);
+        }
+
+        private void buttonReloadConfig_Click(object sender, RoutedEventArgs e)
+        {
+            doStuff.LoadConfig();
         }
     }
 }

@@ -8,17 +8,25 @@ namespace PragueParkingDataAccess
     {
         public ParkingSpot()
         {
-            Vehicles = new List<Vehicle>();
+            //Vehicles = new List<Vehicle>(); // Detta gör så fordonen inte visas korrekt i MainWindow!
+            if (Vehicles == null)
+            {
+                Vehicles = new List<Vehicle>();
+            }
             Size = 4;
         }
         public ParkingSpot(in int size)
         {
+            if (Vehicles == null)
+            {
+                Vehicles = new List<Vehicle>();
+            }
             Size = size;
         }
         public int ParkingSpotId { get; set; }
         public int Size { get; set; }
         public ICollection<Vehicle> Vehicles { get; set; }
-        [NotMapped] public string VehiclesString // Något ful property, finns säkeret ett bättre sätt, men fungerar bra nog.
+        [NotMapped] public string VehiclesString
         { 
             get 
             {
@@ -29,6 +37,18 @@ namespace PragueParkingDataAccess
                 }
                 return result;
             } 
+        }
+        [NotMapped] public int Capacity
+        {
+            get
+            {
+                int capacity = Size;
+                foreach (var item in Vehicles)
+                {
+                    capacity -= item.Size;
+                }
+                return capacity;
+            }
         }
         [NotMapped] public string CellColor
         {
@@ -42,18 +62,18 @@ namespace PragueParkingDataAccess
                 }
                 if (sum >= Size)
                 {
-                    //Set Cell Green
-                    result = "green";
+                    // Sets Cell Green
+                    result = "empty";
                 }
                 if (sum <= 0)
                 {
-                    //Set Cell Red
-                    result = "red";
+                    // Sets Cell Red
+                    result = "full";
                 }
                 if (sum > 0 & sum < Size)
                 {
-                    //Set Cell Yellow
-                    result = "yellow";
+                    // Sets Cell Yellow
+                    result = "partial";
                 }
                 return result;
             }
