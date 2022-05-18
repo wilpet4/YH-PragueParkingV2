@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PragueParkingDataAccess;
 
 namespace PragueParkingCore
 {
     public static class DoStuffExtensions
     {
-        public enum VehicleTypes { Car, MC } // Måste hålla denna uppdaterad. Inte kommit på ett bättre sätt än.
+        public enum VehicleTypes { Car, MC } // Måste hålla denna uppdaterad om man vill lägga till fler fordonstyper. Inte kommit på ett bättre sätt än.
         public static List<VehicleTypes> GetAllVehicleTypes()
         {
             List<VehicleTypes> result = new List<VehicleTypes>();
@@ -62,9 +63,9 @@ namespace PragueParkingCore
         }
         public static List<ParkingSpot> GetMainViewData(in ParkingContext context)
         {
-            var query = from p in context.ParkingSpots
+            var query = (from p in context.ParkingSpots
                         orderby p.ParkingSpotId
-                        select p;
+                        select p).Include(p => p.Vehicles);
             List<ParkingSpot> result = query.ToList();
             return result;
         }
