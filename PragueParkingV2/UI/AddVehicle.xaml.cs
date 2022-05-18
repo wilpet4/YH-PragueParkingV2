@@ -34,7 +34,7 @@ namespace PragueParkingUI
             //
             Close();
         }
-        private List<int> LoadAvailableParkingSpots(in int minimumSize)
+        private List<int> LoadAvailableParkingSpotsID(in int minimumSize)
         {
             List<int> result = new List<int>();
             availableParkingSpots = DoStuffExtensions.GetAvailableParkingSpots(context, minimumSize);
@@ -61,7 +61,7 @@ namespace PragueParkingUI
                     break;
             }
             comboBoxParkingSpots.IsEnabled = true;
-            comboBoxParkingSpots.ItemsSource = LoadAvailableParkingSpots(minimumSize);
+            comboBoxParkingSpots.ItemsSource = LoadAvailableParkingSpotsID(minimumSize);
             // Fixa så att comboBoxParkingSpots visar rätt p-platser!
         }
 

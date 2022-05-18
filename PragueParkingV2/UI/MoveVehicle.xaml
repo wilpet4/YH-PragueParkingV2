@@ -8,7 +8,7 @@
         Title="MoveVehicle" Height="550" Width="800" SizeToContent="WidthAndHeight">
     <Grid Margin="0,10,10,15">
         <DataGrid x:Name="dataGridVehicles" Margin="10,32,430,0" AutoGenerateColumns="False" SelectionMode="Single" ColumnWidth="Auto" MaxWidth="350" MaxHeight="477" HorizontalContentAlignment="Stretch" Grid.ColumnSpan="2"
-                  MinHeight="477">
+                  MinHeight="477" SelectionChanged="dataGridVehicles_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ParkingSpotId" Binding="{Binding ParkingSpotId}"/>
                 <DataGridTextColumn Header="Registration" Binding="{Binding Registration}"/>
@@ -19,5 +19,6 @@
         <TextBlock FontSize="16" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Select Vehicle Here: " VerticalAlignment="Top" Width="145" Height="16"/>
         <ComboBox Name="comboBoxParking" HorizontalAlignment="Left" Margin="385,69,0,0" VerticalAlignment="Top" Width="180" Height="36"/>
         <TextBlock FontSize="16" HorizontalAlignment="Left" Margin="365,32,0,0" TextWrapping="Wrap" Text="Select New Parking Spot Here: " VerticalAlignment="Top" Width="220" Height="32"/>
+        <Button Name="buttonConfirm" FontSize="16" Content="Confirm" HorizontalAlignment="Left" Margin="415,459,0,0" VerticalAlignment="Top" Height="40" Width="120"/>
     </Grid>
 </Window>
