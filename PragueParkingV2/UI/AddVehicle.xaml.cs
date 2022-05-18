@@ -34,20 +34,34 @@ namespace PragueParkingUI
             //
             Close();
         }
-        private List<int> LoadAvailableParkingSpots()
+        private List<int> LoadAvailableParkingSpots(in int minimumSize)
         {
             List<int> result = new List<int>();
-            availableParkingSpots = DoStuffExtensions.GetAvailableParkingSpots(context);
+            availableParkingSpots = DoStuffExtensions.GetAvailableParkingSpots(context, minimumSize);
             foreach (var pSpot in availableParkingSpots)
             {
-                result.Add(pSpot.ParkingSpotId);
+                result.Add(pSpot.ParkingSpotId); //Finns det ett bättre sätt att bara ta ut 1 property ur en lista?
             }
             return result;
         }
         private void comboBoxVehicleType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            int minimumSize = 0;
+            switch ((DoStuffExtensions.VehicleTypes)comboBoxVehicleType.SelectedItem)
+            {
+                case DoStuffExtensions.VehicleTypes.Car:
+                    Car c = new Car();
+                    minimumSize = c.Size;
+                    break;
+                case DoStuffExtensions.VehicleTypes.MC:
+                    MC mc = new MC();
+                    minimumSize = mc.Size;
+                    break;
+                default:
+                    break;
+            }
             comboBoxParkingSpots.IsEnabled = true;
-            comboBoxParkingSpots.ItemsSource = LoadAvailableParkingSpots();
+            comboBoxParkingSpots.ItemsSource = LoadAvailableParkingSpots(minimumSize);
             // Fixa så att comboBoxParkingSpots visar rätt p-platser!
         }
 

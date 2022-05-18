@@ -1,0 +1,23 @@
+﻿<Window x:Class="PragueParkingUI.MoveVehicle"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PragueParkingUI"
+        mc:Ignorable="d" FontFamily="Lato" FontSize="12"
+        Title="MoveVehicle" Height="550" Width="800" SizeToContent="WidthAndHeight">
+    <Grid Margin="0,10,10,15">
+        <DataGrid x:Name="dataGridVehicles" Margin="10,32,430,0" AutoGenerateColumns="False" SelectionMode="Single" ColumnWidth="Auto" MaxWidth="350" MaxHeight="477" HorizontalContentAlignment="Stretch" Grid.ColumnSpan="2"
+                  MinHeight="477">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ParkingSpotId" Binding="{Binding ParkingSpotId}"/>
+                <DataGridTextColumn Header="Registration" Binding="{Binding Registration}"/>
+                <DataGridTextColumn Header="Arrival" Binding="{Binding Arrival}"/>
+                <DataGridTextColumn Header="Discriminator" Binding="{Binding VehicleType}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock FontSize="16" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Select Vehicle Here: " VerticalAlignment="Top" Width="145" Height="16"/>
+        <ComboBox Name="comboBoxParking" HorizontalAlignment="Left" Margin="385,69,0,0" VerticalAlignment="Top" Width="180" Height="36"/>
+        <TextBlock FontSize="16" HorizontalAlignment="Left" Margin="365,32,0,0" TextWrapping="Wrap" Text="Select New Parking Spot Here: " VerticalAlignment="Top" Width="220" Height="32"/>
+    </Grid>
+</Window>

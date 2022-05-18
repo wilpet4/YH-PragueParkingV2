@@ -51,5 +51,11 @@ namespace PragueParkingUI
         {
             doStuff.LoadConfig();
         }
+
+        private void buttonMoveVehicle_Click(object sender, RoutedEventArgs e)
+        {
+            MoveVehicle moveVehiclePopup = new MoveVehicle();
+            moveVehiclePopup.Show();
+        }
     }
 }

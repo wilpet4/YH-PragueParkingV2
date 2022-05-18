@@ -21,12 +21,19 @@ namespace PragueParkingCore
                         select p;
             return query.ToList();
         }
-        public static List<ParkingSpot> GetAvailableParkingSpots(in ParkingContext context) 
+        public static List<ParkingSpot> GetAvailableParkingSpots(in ParkingContext context, in int minimumSize) 
         {
-            var query = from p in context.ParkingSpots
-                        where p.Vehicles.Count == 0
-                        select p;
-            return query.ToList();
+            List<ParkingSpot> result = new List<ParkingSpot>();
+            var query = (from p in context.ParkingSpots
+                        select p);
+            foreach (var item in query)
+            {
+                if (item.Capacity >= minimumSize)
+                {
+                    result.Add(item);
+                }
+            }
+            return result;
         }
         public static List<ParkingSpot> GetOccupiedParkingSpots(in ParkingContext context)
         {

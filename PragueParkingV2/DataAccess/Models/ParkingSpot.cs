@@ -26,9 +26,14 @@ namespace PragueParkingDataAccess
         public int ParkingSpotId { get; set; }
         public int Size { get; set; }
         public ICollection<Vehicle> Vehicles { get; set; }
-        [NotMapped] public string VehiclesString
-        { 
-            get 
+        public int ParkingGarageId { get; set; }
+        [Required] public ParkingGarage Garage { get; set; }
+
+        // Dessa är endast för datagrid i MainWindow. Följer inte med till databasen.
+        [NotMapped]
+        public string VehiclesString
+        {
+            get
             {
                 string result = string.Empty;
                 foreach (var item in Vehicles)
@@ -36,9 +41,10 @@ namespace PragueParkingDataAccess
                     result += $"#{item.Registration} ";
                 }
                 return result;
-            } 
+            }
         }
-        [NotMapped] public int Capacity
+        [NotMapped]
+        public int Capacity
         {
             get
             {
@@ -50,11 +56,12 @@ namespace PragueParkingDataAccess
                 return capacity;
             }
         }
-        [NotMapped] public string CellColor
+        [NotMapped]
+        public string CellColor
         {
             get
             {
-                int sum = Size; 
+                int sum = Size;
                 string result = string.Empty;
                 foreach (var item in Vehicles)
                 {
@@ -78,7 +85,5 @@ namespace PragueParkingDataAccess
                 return result;
             }
         }
-        public int ParkingGarageId { get; set; }
-        [Required] public ParkingGarage Garage { get; set; }
     }
 }
