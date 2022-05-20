@@ -143,5 +143,16 @@ namespace PragueParkingCore
                     break;
             }
         }
+        public void MoveVehicleToParkingSpot(in Vehicle vehicle, in int parkingSpotID)
+        {
+            ParkingSpot previousParkingSpot = DoStuffExtensions.GetParkingSpot(context, vehicle.ParkingSpotId);
+            ParkingSpot newParkingSpot = DoStuffExtensions.GetParkingSpot(context, parkingSpotID);
+            if (DoStuffExtensions.CheckParkingSpotCapacity(context, newParkingSpot, vehicle))
+            {
+                newParkingSpot.Vehicles.Add(vehicle);
+                previousParkingSpot.Vehicles.Remove(vehicle);
+                context.SaveChanges();
+            }
+        }
     }
 }

@@ -13,7 +13,8 @@ namespace PragueParkingUI
     {
         ParkingContext context = Db.Instance;
         List<ParkingSpot> availableParkingSpots = new List<ParkingSpot>();
-
+        DoStuff doStuff = new DoStuff();
+        Vehicle selectedVehicle;
         public MoveVehicle()
         {
             InitializeComponent();
@@ -41,13 +42,27 @@ namespace PragueParkingUI
         {
             try
             {
-                Vehicle selectedVehicle = (Vehicle)dataGridVehicles.SelectedItem;
+                selectedVehicle = (Vehicle)dataGridVehicles.SelectedItem;
                 comboBoxParking.ItemsSource = LoadAvailableParkingSpotsID(selectedVehicle.Size);
             }
             catch (System.Exception)
             {
                 MessageBox.Show("selection is not a vehicle");
+                buttonConfirm.IsEnabled = false;
             }
+        }
+        private void comboBoxParking_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            buttonConfirm.IsEnabled = true;
+        }
+        private void buttonConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedVehicle != null)
+            {
+                int.TryParse(comboBoxParking.SelectedItem.ToString(), out int result);
+                doStuff.MoveVehicleToParkingSpot(selectedVehicle, result);
+            }
+            Close();
         }
     }
 }

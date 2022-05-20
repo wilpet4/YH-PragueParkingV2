@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PragueParkingUI"
         mc:Ignorable="d" FontFamily="Lato" FontSize="12"
-        Title="MoveVehicle" Height="550" Width="800" SizeToContent="WidthAndHeight">
+        Title="MoveVehicle" Height="550" Width="653" SizeToContent="WidthAndHeight">
     <Grid Margin="0,10,10,15">
-        <DataGrid x:Name="dataGridVehicles" Margin="10,32,430,0" AutoGenerateColumns="False" SelectionMode="Single" ColumnWidth="Auto" MaxWidth="350" MaxHeight="477" HorizontalContentAlignment="Stretch" Grid.ColumnSpan="2"
+        <DataGrid x:Name="dataGridVehicles" Margin="10,32,283,0" AutoGenerateColumns="False" SelectionMode="Single" ColumnWidth="Auto" MaxWidth="350" MaxHeight="477" HorizontalContentAlignment="Stretch"
                   MinHeight="477" SelectionChanged="dataGridVehicles_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ParkingSpotId" Binding="{Binding ParkingSpotId}"/>
@@ -17,8 +17,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <TextBlock FontSize="16" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Select Vehicle Here: " VerticalAlignment="Top" Width="145" Height="16"/>
-        <ComboBox Name="comboBoxParking" HorizontalAlignment="Left" Margin="385,69,0,0" VerticalAlignment="Top" Width="180" Height="36"/>
-        <TextBlock FontSize="16" HorizontalAlignment="Left" Margin="365,32,0,0" TextWrapping="Wrap" Text="Select New Parking Spot Here: " VerticalAlignment="Top" Width="220" Height="32"/>
-        <Button Name="buttonConfirm" FontSize="16" Content="Confirm" HorizontalAlignment="Left" Margin="415,459,0,0" VerticalAlignment="Top" Height="40" Width="120"/>
+        <ComboBox Name="comboBoxParking" HorizontalAlignment="Left" Margin="380,42,0,0" VerticalAlignment="Top" Width="180" Height="36" SelectionChanged="comboBoxParking_SelectionChanged"/>
+        <TextBlock FontSize="16" HorizontalAlignment="Left" Margin="360,10,0,0" TextWrapping="Wrap" Text="Select New Parking Spot Here: " VerticalAlignment="Top" Width="220" Height="16"/>
+        <Button Name="buttonConfirm" FontSize="16" Content="Confirm" HorizontalAlignment="Left" Margin="415,459,0,0" VerticalAlignment="Top" Height="40" Width="120" IsEnabled="False" Click="buttonConfirm_Click"/>
     </Grid>
 </Window>
