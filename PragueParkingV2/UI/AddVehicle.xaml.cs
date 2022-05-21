@@ -62,7 +62,6 @@ namespace PragueParkingUI
             }
             comboBoxParkingSpots.IsEnabled = true;
             comboBoxParkingSpots.ItemsSource = LoadAvailableParkingSpotsID(minimumSize);
-            // Fixa så att comboBoxParkingSpots visar rätt p-platser!
         }
 
         private void comboBoxParkingSpots_SelectionChanged(object sender, SelectionChangedEventArgs e)
