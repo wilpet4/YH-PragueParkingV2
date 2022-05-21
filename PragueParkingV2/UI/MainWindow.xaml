@@ -5,16 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PragueParkingUI"
         mc:Ignorable="d" FontFamily="Lato" FontSize="12"
-        Title="WPF Application" Height="550" Width="900" SizeToContent="WidthAndHeight">
+        Title="Prague Parking Deluxe" Height="700" Width="900" SizeToContent="WidthAndHeight">
 
     <Grid>
-        <Image Source="/Logo.png" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="buttonAddVehicle" Content="Add Vehicle" Click="buttonAddVehicle_Click" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="buttonRemoveVehicle" Content="Remove Vehicle" HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top" Width="100" Click="buttonRemoveVehicle_Click"/>
-        <Button x:Name="buttonSearch" Content="Search" HorizontalAlignment="Left" Margin="827,10,0,0" VerticalAlignment="Top" Height="21" Width="63"/>
-        <TextBox x:Name="textboxSearch" HorizontalAlignment="Left" Margin="702,11,0,0" TextWrapping="Wrap" Text="search..." VerticalAlignment="Top" Width="120" Height="19"/>
-        <Image Source="/Logo.png" HorizontalAlignment="Left" Height="100" Margin="790,424,0,0" VerticalAlignment="Top" Width="100"/>
-        <DataGrid x:Name="dataGridMainDisplay" AutoGenerateColumns="False" Margin="115,35,115,10" MaxHeight="489" MaxWidth="670" SourceUpdated="dataGridMainDisplay_SourceUpdated" ColumnWidth="*">
+        <Image Source="/Logo.png" HorizontalAlignment="Left" Height="110" Margin="10,10,0,0" VerticalAlignment="Top" Width="110"/>
+        <Button x:Name="buttonAddVehicle" Content="Add Vehicle" Click="buttonAddVehicle_Click" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top" Width="110" Height="25"/>
+        <Button x:Name="buttonRemoveVehicle" Content="Remove Vehicle" HorizontalAlignment="Left" Margin="10,175,0,0" VerticalAlignment="Top" Width="110" Click="buttonRemoveVehicle_Click" Height="25"/>
+        <DataGrid x:Name="dataGridMainDisplay" AutoGenerateColumns="False" Margin="130,40,10,10" MaxHeight="644" MaxWidth="760" SourceUpdated="dataGridMainDisplay_SourceUpdated" ColumnWidth="*">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ParkingSpotId" Binding="{Binding ParkingSpotId}" Width="95"/>
                 <DataGridTextColumn Header="Vehicles" Binding="{Binding VehiclesString}"/>
@@ -38,10 +35,10 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="buttonRefreshView" HorizontalAlignment="Left" Margin="115,10,0,0" VerticalAlignment="Top" Height="20" Width="40" Click="buttonRefreshView_Click">
+        <Button x:Name="buttonRefreshView" HorizontalAlignment="Left" Margin="125,10,0,0" VerticalAlignment="Top" Height="25" Width="45" Click="buttonRefreshView_Click">
             <Image Source="RefreshIcon.png"/>
         </Button>
-        <Button x:Name="buttonReloadConfig" Content="Reload Config" HorizontalAlignment="Left" Margin="790,401,0,0" VerticalAlignment="Top" Width="100" Click="buttonReloadConfig_Click"/>
-        <Button x:Name="buttonMoveVehicle" Content="Move Vehicle" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" Width="100" Click="buttonMoveVehicle_Click"/>
+        <Button x:Name="buttonReloadConfig" Content="Reload Config" HorizontalAlignment="Left" Margin="10,654,0,0" VerticalAlignment="Top" Height="20" Width="110" Click="buttonReloadConfig_Click"/>
+        <Button x:Name="buttonMoveVehicle" Content="Move Vehicle" HorizontalAlignment="Left" Margin="10,210,0,0" VerticalAlignment="Top" Width="110" Height="25" Click="buttonMoveVehicle_Click"/>
     </Grid>
 </Window>

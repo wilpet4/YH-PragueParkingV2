@@ -18,13 +18,13 @@ namespace PragueParkingUI
             InitializeComponent();
             SetDataGridSource();
         }
-        private List<dynamic> FormatDataGrid()
+        private List<Vehicle> FormatDataGrid()
         {
             List<Vehicle> vehicles = DoStuffExtensions.GetAllVehicles(context);
             var format = from v in vehicles
                          orderby v.ParkingSpotId
                          select v;
-            List<dynamic> data = new List<dynamic>();
+            List<Vehicle> data = new List<Vehicle>();
             data.AddRange(format.ToList());
             return data;
         }
@@ -58,30 +58,29 @@ namespace PragueParkingUI
 
         private void buttonSearch_Click(object sender, RoutedEventArgs e) // Fungerar men inte rätt.
         {
-            Dictionary<Vehicle, int> container = new Dictionary<Vehicle, int>();
-            char[] search = textBoxSearch.Text.ToLower().ToCharArray();
-            List<Vehicle> vehicles = DoStuffExtensions.GetAllVehicles(context);
-            for(int i = 0; i < vehicles.Count; i++)
+            SimpleSearch(textBoxSearch.Text, out List<Vehicle> result);
+            dataGridVehicleSelection.ItemsSource = result;
+        }
+        private void SimpleSearch(in string searchText, out List<Vehicle> result)
+        {
+            string search = searchText;
+            List<Vehicle> foundVehicles = new List<Vehicle>();
+            if (search == string.Empty)
             {
-                int counter = 0;
-                for (int j = 0; j < search.Length; j++)
-                {
-                    if (vehicles[i].Registration.ToLower().Contains(search[j]))
-                    {
-                        counter++;
-                    }
-                }
-                if (counter > 0)
-                {
-                    container.Add(vehicles[i], counter);
-                }
+                result = FormatDataGrid();
             }
-            List<Vehicle> searchResultList = new List<Vehicle>();
-            foreach (var item in container.OrderBy(x => x.Value))
+            else
             {
-                searchResultList.Add(item.Key);
+                var carQuery = from c in context.Cars
+                               where c.Registration.Equals(search)
+                               select c;
+                var mcQuery = from mc in context.MCs
+                              where mc.Registration.Equals(search)
+                              select mc;
+                foundVehicles.AddRange(carQuery.ToList());
+                foundVehicles.AddRange(mcQuery.ToList());
+                result = foundVehicles;
             }
-            dataGridVehicleSelection.ItemsSource = FormatDataGrid(searchResultList);
         }
     }
 }
