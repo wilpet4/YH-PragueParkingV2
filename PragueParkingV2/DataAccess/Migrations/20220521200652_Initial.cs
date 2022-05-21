@@ -22,6 +22,23 @@ namespace WpfAppDataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Receipts",
+                columns: table => new
+                {
+                    ReceiptId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Registration = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ParkingSpotId = table.Column<int>(type: "int", nullable: false),
+                    Arrival = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Departure = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Price = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Receipts", x => x.ReceiptId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ParkingSpots",
                 columns: table => new
                 {
@@ -77,6 +94,9 @@ namespace WpfAppDataAccess.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Receipts");
+
             migrationBuilder.DropTable(
                 name: "Vehicle");
 

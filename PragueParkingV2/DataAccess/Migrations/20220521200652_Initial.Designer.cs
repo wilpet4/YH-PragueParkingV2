@@ -12,7 +12,7 @@ using PragueParkingDataAccess;
 namespace WpfAppDataAccess.Migrations
 {
     [DbContext(typeof(ParkingContext))]
-    [Migration("20220504225143_Initial")]
+    [Migration("20220521200652_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,6 +56,35 @@ namespace WpfAppDataAccess.Migrations
                     b.HasIndex("ParkingGarageId");
 
                     b.ToTable("ParkingSpots");
+                });
+
+            modelBuilder.Entity("PragueParkingDataAccess.Receipt", b =>
+                {
+                    b.Property<int>("ReceiptId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReceiptId"), 1L, 1);
+
+                    b.Property<DateTime>("Arrival")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Departure")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ParkingSpotId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Registration")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ReceiptId");
+
+                    b.ToTable("Receipts");
                 });
 
             modelBuilder.Entity("PragueParkingDataAccess.Vehicle", b =>
