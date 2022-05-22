@@ -43,7 +43,7 @@ namespace PragueParkingUI
         }
         private void buttonRemove_Click(object sender, RoutedEventArgs e)
         {
-            foreach (var item in dataGridVehicleSelection.SelectedItems)
+            foreach (var item in dataGridVehicleSelection.SelectedItems) // Kanske i en egen metod fastän väldigt lite kod?
             {
                 if (item.GetType().BaseType == typeof(Vehicle))
                 {
@@ -56,13 +56,13 @@ namespace PragueParkingUI
             Close();
         }
 
-        private void buttonSearch_Click(object sender, RoutedEventArgs e) // Fungerar men inte rätt.
+        private void buttonSearch_Click(object sender, RoutedEventArgs e)
         {
             SimpleSearch(textBoxSearch.Text, out List<Vehicle> result);
             dataGridVehicleSelection.ItemsSource = result;
         }
-        private void SimpleSearch(in string searchText, out List<Vehicle> result)
-        {
+        private void SimpleSearch(in string searchText, out List<Vehicle> result) // Väldigt enkel men dålig sökfunktion
+        {                                                                         // Matchar bara mot exakta strängar
             string search = searchText;
             List<Vehicle> foundVehicles = new List<Vehicle>();
             if (search == string.Empty)

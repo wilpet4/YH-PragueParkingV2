@@ -20,7 +20,7 @@ namespace PragueParkingCore
         }
         ParkingContext context = DbSingleton.Instance;
         XDocument configDocument;
-        public void LoadSampleData()
+        public void LoadSampleData() // Skapar p-platser med lite olika storlek.
         {
             LoadConfig();
             int parkingSpots = 0;
@@ -49,19 +49,8 @@ namespace PragueParkingCore
         {
             configDocument = XDocument.Load(@"config.xml");
         }
-        public void SupplyRemoveVehicleDataGrid(List<ParkingSpot> parkingSpots)
-        {
-            List<Vehicle> result = new List<Vehicle>();
-            foreach (var item in parkingSpots)
-            {
-                foreach (Vehicle vehicle in item.Vehicles)
-                {
-                    result.Add(vehicle);
-                }
-            }
-        }
-        public void PrintReceipt(in Vehicle vehicle)
-        {
+        public void PrintReceipt(in Vehicle vehicle) // Simulerar utskrift av kvitto genom att
+        {                                            // skapa en texfil i PragueParkingV2\UI\bin\Debug\net6.0-windows\Receipts
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             string cleanDate = DateTime.Now.Date.ToString().Replace(':', '.');
             string fileName = $"{cleanDate}.{vehicle.Registration}.{vehicle.ParkingSpotId}.txt";
@@ -90,7 +79,7 @@ namespace PragueParkingCore
             int result = 0;
             DateTime arrival = vehicle.Arrival;
             DateTime departure = DateTime.Now;
-            TimeSpan time = departure - arrival;
+            TimeSpan time = departure - arrival; // Hämtar ut skillnad mellan 2 datum.
             double minutesParked = time.TotalMinutes;
             short freeTime = 10;
             short counter = 60;
@@ -143,7 +132,7 @@ namespace PragueParkingCore
                     break;
             }
         }
-        public void MoveVehicleToParkingSpot(in Vehicle vehicle, in int parkingSpotID)
+        public void MoveVehicleToParkingSpot(in Vehicle vehicle, in int parkingSpotID) // "Byter" plats på fordon genom att lägga in det i ny plats och ta bort från förra.
         {
             ParkingSpot previousParkingSpot = DoStuffStatics.GetParkingSpot(context, vehicle.ParkingSpotId);
             ParkingSpot newParkingSpot = DoStuffStatics.GetParkingSpot(context, parkingSpotID);

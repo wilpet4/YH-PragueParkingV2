@@ -8,7 +8,7 @@ namespace PragueParkingCore
     public static class DoStuffStatics
     {
         public enum VehicleTypes { Car, MC } // Måste hålla denna uppdaterad om man vill lägga till fler fordonstyper. Inte kommit på ett bättre sätt än.
-        public static List<VehicleTypes> GetAllVehicleTypes()
+        public static List<VehicleTypes> GetAllVehicleTypes() // Ful!
         {
             List<VehicleTypes> result = new List<VehicleTypes>();
             result.Add(VehicleTypes.Car);
@@ -72,11 +72,11 @@ namespace PragueParkingCore
         {
             var query = (from p in context.ParkingSpots
                         orderby p.ParkingSpotId
-                        select p).Include(p => p.Vehicles);
+                        select p).Include(p => p.Vehicles); // Använder Include för att även ladda all relaterad data, dvs alla fordon i p-platserna.
             List<ParkingSpot> result = query.ToList();
             return result;
         }
-        public static bool CheckParkingSpotCapacity(in ParkingContext context, in ParkingSpot parkingSpot, Vehicle newVehicle)
+        public static bool CheckParkingSpotCapacity(in ParkingContext context, in ParkingSpot parkingSpot, Vehicle newVehicle) // Kollar helt enkelt om ett fordon får plats.
         {
             int sum = 0;
             foreach (Vehicle item in parkingSpot.Vehicles)
