@@ -5,7 +5,7 @@ using PragueParkingDataAccess;
 
 namespace PragueParkingCore
 {
-    public static class DoStuffExtensions
+    public static class DoStuffStatics
     {
         public enum VehicleTypes { Car, MC } // Måste hålla denna uppdaterad om man vill lägga till fler fordonstyper. Inte kommit på ett bättre sätt än.
         public static List<VehicleTypes> GetAllVehicleTypes()

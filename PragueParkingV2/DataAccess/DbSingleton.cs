@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PragueParkingDataAccess
 {
-    public static class Db
+    public static class DbSingleton
     {
         private static ParkingContext instance; // Singleton
         public static ParkingContext Instance

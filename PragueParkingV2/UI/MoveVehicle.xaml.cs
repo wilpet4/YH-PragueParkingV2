@@ -11,7 +11,7 @@ namespace PragueParkingUI
     /// </summary>
     public partial class MoveVehicle : Window
     {
-        ParkingContext context = Db.Instance;
+        ParkingContext context = DbSingleton.Instance;
         List<ParkingSpot> availableParkingSpots = new List<ParkingSpot>();
         DoStuff doStuff = new DoStuff();
         Vehicle selectedVehicle;
@@ -22,7 +22,7 @@ namespace PragueParkingUI
         }
         private void SetDataGridSource()
         {
-            dataGridVehicles.ItemsSource = FormatDataGrid(DoStuffExtensions.GetAllVehicles(context));
+            dataGridVehicles.ItemsSource = FormatDataGrid(DoStuffStatics.GetAllVehicles(context));
             List<Vehicle> FormatDataGrid(in List<Vehicle> listToFormat)
             {
                 return listToFormat.OrderBy(v => v.ParkingSpotId).ToList();
@@ -31,7 +31,7 @@ namespace PragueParkingUI
         private List<int> LoadAvailableParkingSpotsID(in int minimumSize)
         {
             List<int> result = new List<int>();
-            availableParkingSpots = DoStuffExtensions.GetAvailableParkingSpots(context, minimumSize);
+            availableParkingSpots = DoStuffStatics.GetAvailableParkingSpots(context, minimumSize);
             foreach (var pSpot in availableParkingSpots)
             {
                 result.Add(pSpot.ParkingSpotId); //Finns det ett bättre sätt att bara ta ut 1 property ur en lista?

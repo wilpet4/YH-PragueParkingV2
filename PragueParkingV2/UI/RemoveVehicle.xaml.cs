@@ -11,7 +11,7 @@ namespace PragueParkingUI
     /// </summary>
     public partial class RemoveVehicle : Window
     {
-        ParkingContext context = Db.Instance;
+        ParkingContext context = DbSingleton.Instance;
         DoStuff doStuff = new DoStuff();
         public RemoveVehicle()
         {
@@ -20,7 +20,7 @@ namespace PragueParkingUI
         }
         private List<Vehicle> FormatDataGrid()
         {
-            List<Vehicle> vehicles = DoStuffExtensions.GetAllVehicles(context);
+            List<Vehicle> vehicles = DoStuffStatics.GetAllVehicles(context);
             var format = from v in vehicles
                          orderby v.ParkingSpotId
                          select v;

@@ -14,7 +14,7 @@ namespace PragueParkingUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        ParkingContext context = Db.Instance;
+        ParkingContext context = DbSingleton.Instance;
         DoStuff doStuff = new DoStuff();
         public MainWindow()
         {
@@ -25,7 +25,7 @@ namespace PragueParkingUI
                 context.Database.Migrate();
                 doStuff.LoadSampleData();
             }
-            dataGridMainDisplay.ItemsSource = DoStuffExtensions.GetMainViewData(context);
+            dataGridMainDisplay.ItemsSource = DoStuffStatics.GetMainViewData(context);
         }
         private void buttonAddVehicle_Click(object sender, RoutedEventArgs e)
         {
@@ -39,12 +39,12 @@ namespace PragueParkingUI
         }
         private void buttonRefreshView_Click(object sender, RoutedEventArgs e)
         {
-            dataGridMainDisplay.ItemsSource = DoStuffExtensions.GetMainViewData(context);
+            dataGridMainDisplay.ItemsSource = DoStuffStatics.GetMainViewData(context);
         }
 
         private void dataGridMainDisplay_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e) // Fungerar lite konstigt. uppdaterar inte direkt, ibland måste 
         {                                                                                                          // man scrolla lite eller trycka på datagrid för att den ska uppdateras
-            dataGridMainDisplay.ItemsSource = DoStuffExtensions.GetMainViewData(context);
+            dataGridMainDisplay.ItemsSource = DoStuffStatics.GetMainViewData(context);
         }
 
         private void buttonReloadConfig_Click(object sender, RoutedEventArgs e)

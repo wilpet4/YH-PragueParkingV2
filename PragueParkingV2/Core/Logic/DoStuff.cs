@@ -18,7 +18,7 @@ namespace PragueParkingCore
         {
             LoadConfig(); // Läser in xml-filen.
         }
-        ParkingContext context = Db.Instance;
+        ParkingContext context = DbSingleton.Instance;
         XDocument configDocument;
         public void LoadSampleData()
         {
@@ -111,13 +111,13 @@ namespace PragueParkingCore
             }
             return result;
         }
-        public void AddNewVehicleToParkingSpot(in DoStuffExtensions.VehicleTypes type, in ParkingSpot p, in string reg)
+        public void AddNewVehicleToParkingSpot(in DoStuffStatics.VehicleTypes type, in ParkingSpot p, in string reg)
         {
             switch (type)
             {
-                case DoStuffExtensions.VehicleTypes.Car:
+                case DoStuffStatics.VehicleTypes.Car:
                     Car newCar = new Car(reg);
-                    if (DoStuffExtensions.CheckParkingSpotCapacity(context, p, newCar) == true)
+                    if (DoStuffStatics.CheckParkingSpotCapacity(context, p, newCar) == true)
                     {
                         p.Vehicles.Add(newCar);
                         context.SaveChanges();
@@ -127,9 +127,9 @@ namespace PragueParkingCore
                         MessageBox.Show("The selected spot is too full. Cannot add vehicle.", "Error");
                     }
                     break;
-                case DoStuffExtensions.VehicleTypes.MC:
+                case DoStuffStatics.VehicleTypes.MC:
                     MC newMC = new MC(reg);
-                    if (DoStuffExtensions.CheckParkingSpotCapacity(context, p, newMC) == true)
+                    if (DoStuffStatics.CheckParkingSpotCapacity(context, p, newMC) == true)
                     {
                         p.Vehicles.Add(newMC);
                         context.SaveChanges();
@@ -145,9 +145,9 @@ namespace PragueParkingCore
         }
         public void MoveVehicleToParkingSpot(in Vehicle vehicle, in int parkingSpotID)
         {
-            ParkingSpot previousParkingSpot = DoStuffExtensions.GetParkingSpot(context, vehicle.ParkingSpotId);
-            ParkingSpot newParkingSpot = DoStuffExtensions.GetParkingSpot(context, parkingSpotID);
-            if (DoStuffExtensions.CheckParkingSpotCapacity(context, newParkingSpot, vehicle))
+            ParkingSpot previousParkingSpot = DoStuffStatics.GetParkingSpot(context, vehicle.ParkingSpotId);
+            ParkingSpot newParkingSpot = DoStuffStatics.GetParkingSpot(context, parkingSpotID);
+            if (DoStuffStatics.CheckParkingSpotCapacity(context, newParkingSpot, vehicle))
             {
                 newParkingSpot.Vehicles.Add(vehicle);
                 previousParkingSpot.Vehicles.Remove(vehicle);

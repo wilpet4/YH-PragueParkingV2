@@ -12,13 +12,13 @@ namespace PragueParkingUI
     /// </summary>
     public partial class AddVehicle : Window
     {
-        ParkingContext context = Db.Instance;
+        ParkingContext context = DbSingleton.Instance;
         List<ParkingSpot> availableParkingSpots = new List<ParkingSpot>();
         DoStuff doStuff = new DoStuff();
         public AddVehicle()
         {
             InitializeComponent();
-            comboBoxVehicleType.ItemsSource = DoStuffExtensions.GetAllVehicleTypes();
+            comboBoxVehicleType.ItemsSource = DoStuffStatics.GetAllVehicleTypes();
         }
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -28,16 +28,16 @@ namespace PragueParkingUI
             }
             // Kanske flytta detta till en egen metod.
             string reg = textBoxRegistration.Text;
-            var vehicleInput = (DoStuffExtensions.VehicleTypes)comboBoxVehicleType.SelectedItem;
-            ParkingSpot p = DoStuffExtensions.GetParkingSpot(context, availableParkingSpots[comboBoxParkingSpots.SelectedIndex].ParkingSpotId);
-            doStuff.AddNewVehicleToParkingSpot((DoStuffExtensions.VehicleTypes)comboBoxVehicleType.SelectedItem, p, reg);
+            var vehicleInput = (DoStuffStatics.VehicleTypes)comboBoxVehicleType.SelectedItem;
+            ParkingSpot p = DoStuffStatics.GetParkingSpot(context, availableParkingSpots[comboBoxParkingSpots.SelectedIndex].ParkingSpotId);
+            doStuff.AddNewVehicleToParkingSpot((DoStuffStatics.VehicleTypes)comboBoxVehicleType.SelectedItem, p, reg);
             //
             Close();
         }
         private List<int> LoadAvailableParkingSpotsID(in int minimumSize)
         {
             List<int> result = new List<int>();
-            availableParkingSpots = DoStuffExtensions.GetAvailableParkingSpots(context, minimumSize);
+            availableParkingSpots = DoStuffStatics.GetAvailableParkingSpots(context, minimumSize);
             foreach (var pSpot in availableParkingSpots)
             {
                 result.Add(pSpot.ParkingSpotId); //Finns det ett bättre sätt att bara ta ut 1 property ur en lista?
@@ -47,13 +47,13 @@ namespace PragueParkingUI
         private void comboBoxVehicleType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int minimumSize = 0;
-            switch ((DoStuffExtensions.VehicleTypes)comboBoxVehicleType.SelectedItem)
+            switch ((DoStuffStatics.VehicleTypes)comboBoxVehicleType.SelectedItem)
             {
-                case DoStuffExtensions.VehicleTypes.Car:
+                case DoStuffStatics.VehicleTypes.Car:
                     Car c = new Car();
                     minimumSize = c.Size;
                     break;
-                case DoStuffExtensions.VehicleTypes.MC:
+                case DoStuffStatics.VehicleTypes.MC:
                     MC mc = new MC();
                     minimumSize = mc.Size;
                     break;
